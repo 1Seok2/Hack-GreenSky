@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#map {
+  margin-top: 4rem;
+  margin-left: 5%;
+  width: 90vw;
+  height: 50vh;
+}

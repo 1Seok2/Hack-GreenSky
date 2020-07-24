@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Data from './Data';
 import * as serviceWorker from './serviceWorker';
+import Map from './Map';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Data />
+    <Map />
+    <Data /> 
   </React.StrictMode>,
   document.getElementById('root')
 );

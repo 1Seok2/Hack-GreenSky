@@ -7,30 +7,30 @@ function Data() {
     console.log(loadedCoords);
   };
 
-  const saveCoords = (obj: any) => {
-    localStorage.setItem('coords', JSON.stringify(obj));
-  };
+  // const saveCoords = (obj: any) => {
+  //   localStorage.setItem('coords', JSON.stringify(obj));
+  // };
 
-  const handleGeoSuccess = (position: any) => {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    const coordObj = {
-      latitude: latitude,
-      longitude: longitude,
-    };
-    saveCoords(coordObj);
-  };
+  // const handleGeoSuccess = (position: any) => {
+  //   const latitude = position.coords.latitude;
+  //   const longitude = position.coords.longitude;
+  //   const coordObj = {
+  //     latitude: latitude,
+  //     longitude: longitude,
+  //   };
+  //   saveCoords(coordObj);
+  // };
 
-  const handleGeoError = () => {
-    console.log('error');
-  };
+  // const handleGeoError = () => {
+  //   console.log('error');
+  // };
 
-  const askForCoords = () => {
-    navigator.geolocation.getCurrentPosition(handleGeoSuccess, handleGeoError);
-  };
+  // const askForCoords = () => {
+  //   navigator.geolocation.getCurrentPosition(handleGeoSuccess, handleGeoError);
+  // };
 
   useEffect(() => {
-    askForCoords();
+    //askForCoords();
     loadCoords();
   });
 
