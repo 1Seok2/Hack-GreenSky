@@ -8,8 +8,7 @@ import Data from './components/Data';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Map />
-    <Data />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

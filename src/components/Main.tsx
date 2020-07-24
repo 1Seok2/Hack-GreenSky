@@ -12,6 +12,7 @@ class Hi extends Component {
         {this.state.hello}
         <div>
           <Link to="/data">go to Data</Link>
+          <Link to="/map">go to Map</Link>
         </div>
       </div>
     );
