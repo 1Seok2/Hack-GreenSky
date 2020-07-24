@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Map from './Map';
+import Map from './components/Map';
 import Data from './components/Data';
 
 ReactDOM.render(

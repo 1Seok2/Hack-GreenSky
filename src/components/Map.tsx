@@ -1,5 +1,7 @@
 // global kakao
 import React, { Component } from 'react';
+import Patient from '../mapData.json';
+import { Link } from 'react-router-dom';
 // import useGeolocation from './useGeolocation';
 
 declare global {
@@ -45,6 +47,55 @@ class Map extends Component {
 
   map: any;
 
+  today = new Date();
+  year = this.today.getFullYear();
+  month = this.today.getMonth() + 1;
+  date = this.today.getDate();
+  Months = (this.year%100 === 0 || this.year%4 === 0) && this.year%400 !== 0 ? 
+            [31,28,31,30,31,30,31,31,30,31,30,31] :
+            [31,29,31,30,31,30,31,31,30,31,30,31];
+
+  isInFewDays = (_month : number, _date : number) : number=> {
+    // 알고리즘 수정 요함
+    let gap : number = 11;
+    if(this.month === _month+1 ){
+      gap = this.date + (this.Months[_month-1]-_date);
+    } else if (this. month === _month){
+      gap = this.date-_date;
+    }
+    return gap;
+  }
+
+  PatientInfo : Object[] = [];
+  makeArrayPatient = () => {
+    if(Patient.mapData) {
+      Patient.data.map((value) => {
+        let daysGap : number;
+        daysGap = this.isInFewDays(value.month, value.day);
+        if(daysGap <= 10){
+          let sliced =  value.latlng.split(', ');
+          let patient = {
+            position : value.address,
+            lat : parseFloat(sliced[0]),
+            lng : parseFloat(sliced[1]),
+            month : value.month,
+            day : value.day
+          }
+          this.PatientInfo = [...this.PatientInfo, patient];
+          console.log(daysGap);
+          if(daysGap <= 1){
+            this.makeMarkerInfected(patient, this.colorRed);
+          } else if (1 < daysGap && daysGap <= 4){
+            this.makeMarkerInfected(patient, this.colorOrg);
+          } else if (4 < daysGap && daysGap <=9){
+            this.makeMarkerInfected(patient, this.colorGrn);
+          }
+        }
+      });
+    }
+  }
+
+
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(this.onEvent, this.onError);
     //this.watchId = navigator.geolocation.watchPosition(this.onEvent, this.onError);
@@ -75,13 +126,13 @@ class Map extends Component {
       const coordObj = {
         lat: this.state.latitude,
         lng: this.state.longitude,
+        hi:"hello"
       };
       if (this.state.latitude !== 37.4882) saveCoords(coordObj);
 
       this.makeMarkerMyPos();
-      this.arrayInfected.map((value) =>
-        this.makeMarkerInfected(value.lat, value.lng)
-      );
+
+      this.makeArrayPatient();
     };
   }
 
@@ -108,7 +159,7 @@ class Map extends Component {
   // }
 
   componentWillUnmount() {
-    localStorage.removeItem('coords');
+    // localStorage.removeItem('coords');
   }
 
   onClickPos = () => {
@@ -129,7 +180,6 @@ class Map extends Component {
 
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(this.map);
-
     // 지도에 표시할 원을 생성합니다
     var circle = new window.kakao.maps.Circle({
       center: new window.kakao.maps.LatLng(
@@ -142,55 +192,46 @@ class Map extends Component {
       strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
       strokeStyle: 'solid', // 선의 스타일 입니다
       fillColor: '#CFE7FF', // 채우기 색깔입니다
-      fillOpacity: 0.4, // 채우기 불투명도 입니다
+      fillOpacity: 0.6, // 채우기 불투명도 입니다
     });
 
     // 지도에 원을 표시합니다
     circle.setMap(this.map);
   };
 
+  colorRed = '#eb4d4b';
+  colorOrg = '#f39c12';
+  colorGrn = '#27ae60';
   //patient circles
-  makeMarkerInfected = (_lat: number, _lng: number) => {
+  makeMarkerInfected = (_patient : any, color:string) => {
     var circle = new window.kakao.maps.Circle({
-      center: new window.kakao.maps.LatLng(_lat, _lng), // 원의 중심좌표 입니다
-      radius: 50000, // 미터 단위의 원의 반지름입니다
+      center: new window.kakao.maps.LatLng(_patient.lat, _patient.lng), // 원의 중심좌표 입니다
+      radius: 1200, // 미터 단위의 원의 반지름입니다
       strokeWeight: 1, // 선의 두께입니다
-      strokeColor: '#eb4d4b', // 선의 색깔입니다
-      strokeOpacity: 0.4, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+      strokeColor: `${color}`, // 선의 색깔입니다
+      strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
       strokeStyle: 'solid', // 선의 스타일 입니다
-      fillColor: '#eb4d4b', // 채우기 색깔입니다
-      fillOpacity: 0.4, // 채우기 불투명도 입니다
+      fillColor: `${color}`, // 채우기 색깔입니다
+      fillOpacity: 0.7, // 채우기 불투명도 입니다
     });
-
+    
     // 지도에 원을 표시합니다
     circle.setMap(this.map);
   };
-  //sample array
-  arrayInfected = [
-    {
-      lat: 33.450701,
-      lng: 126.560667,
-    },
-    {
-      lat: 33.450701,
-      lng: 126.550667,
-    },
-    {
-      lat: 33.450701,
-      lng: 126.540667,
-    },
-    {
-      lat: 33.450701,
-      lng: 126.530667,
-    },
-  ];
 
   render() {
     return (
       <>
-        <div id="map"></div>
+        <div id="map">
+          <ul className="mapNav">
+            <li className="navGrn">🟢 5~9 일 사이</li>
+            <li className="navOrg">🟠 2~4 일 사이</li>
+            <li className="navRed">🔴 1일 이내</li>
+          </ul>
+          <Link to="/" className="btn-back">BACK</Link>
+          <div id="btn-reload" onClick={this.onClickPos}>◉</div>
+        </div>
         {/* <InfectedMarker /> */}
-        <button onClick={this.onClickPos}>새 위치</button>
       </>
     );
   }
