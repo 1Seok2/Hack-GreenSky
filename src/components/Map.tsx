@@ -194,6 +194,7 @@ const Map = () => {
       setLongitude (parsedCoords.lng);
       setCountInCircle(0);
       window.kakao.maps.load(() => {
+        DeleteMapElements();
         let container = document.getElementById('map');
         let options = {
           // center: new window.kakao.maps.LatLng(37.506502, 127.053617),
@@ -232,6 +233,8 @@ const Map = () => {
 
   const onSubmitForm = (e : any) => {
     e.preventDefault();
+
+    DeleteMapElements();
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
       mapOption = {
           center: new window.kakao.maps.LatLng(longitude, latitude), // 지도의 중심좌표
@@ -267,6 +270,11 @@ const Map = () => {
       } 
     });
   }
+  
+  const DeleteMapElements = () => {
+    let deleteMap : any = document.getElementById("map");
+    while ( deleteMap.hasChildNodes() ) { deleteMap.removeChild( deleteMap.firstChild ); }
+  }
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(onEvent, onError);
@@ -279,6 +287,7 @@ const Map = () => {
 
     script.onload = () => {
       window.kakao.maps.load(() => {
+        DeleteMapElements();
         let container : any= document.getElementById('map');
 
         let options = {
@@ -307,26 +316,31 @@ const Map = () => {
 
       makeArrayPatient();
     };
-  }, [latitude, longitude])
+    return(() =>{
+      DeleteMapElements()
+    });
+  }, [latitude, longitude]);
 
   return (
     <>
       <div id="map">
+      </div>
+      <div className="options">
         <Data lat={latitude} 
-              lng={longitude}
-              patientNum={countInCircle}
-        />
-        <ul className="mapNav">
-          <li>확진자 발생 추이</li>
-          <li className="navGrn">🟢 5~9 일 사이</li>
-          <li className="navOrg">🟠 2~4 일 사이</li>
-          <li className="navRed">🔴 1일 이내</li>
-        </ul>
-        <form className="form-search none" onSubmit={onSubmitForm}>
-          <input type="text" value={search} onChange={onChangeSearch}/>
-        </form>
-        <a href="#" id="btn-search" onClick={btn_search}>🔎</a>
-        <a href="#" id="btn-reload" onClick={btn_reload}>🧭</a>
+                lng={longitude}
+                patientNum={countInCircle}
+          />
+          <ul className="mapNav">
+            <li>확진자 발생 추이</li>
+            <li className="navGrn">🟢 5~9 일 사이</li>
+            <li className="navOrg">🟠 2~4 일 사이</li>
+            <li className="navRed">🔴 1일 이내</li>
+          </ul>
+          <form className="form-search none" onSubmit={onSubmitForm}>
+            <input type="text" value={search} onChange={onChangeSearch}/>
+          </form>
+          <a href="#" id="btn-search" onClick={btn_search}>🔎</a>
+          <a href="#" id="btn-reload" onClick={btn_reload}>🧭</a>
       </div>
       <AlertModal idNum={0} contents={[
                             "위치 조정 후 우측 하단의 알리미 버튼으로 위험도 볼 수 있습니다",
