@@ -20,7 +20,6 @@ class Data extends Component<DataProps,{}> {
 
   init() {
     let CountPatient = this.props.patientNum;
-    console.log("c:", CountPatient);
     if(CountPatient < 1){
       this.setState({
         conditionState : 'good',

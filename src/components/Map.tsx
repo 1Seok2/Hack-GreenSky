@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Patient from '../mapData.json';
 import { Link } from 'react-router-dom';
 import Data from './Data';
+import { parse } from 'url';
 // import useGeolocation from './useGeolocation';
 
 declare global {
@@ -47,7 +48,7 @@ class Map extends Component {
     console.log('error: ', error);
   };
 
-  map: any; 
+  map: any;
 
   today = new Date();
   year = this.today.getFullYear();
@@ -107,7 +108,7 @@ class Map extends Component {
 
           let distance : number;
           distance = this.positionDistance(this.state.latitude,this.state.longitude,patient.lat,patient.lng);
-          if(distance < 2400){
+          if(distance < 3600){
             this.AddCount();
           }
         }
@@ -212,6 +213,35 @@ class Map extends Component {
     // 지도에 원을 표시합니다
     circle.setMap(this.map);
   };
+  btn_reload = () => {
+    const loadedCoords = localStorage.getItem('coords');
+    if(loadedCoords === null) {
+      console.log('nonal');
+      window.location.reload();
+    } else {
+      console.log('already');
+      const parsedCoords = JSON.parse(loadedCoords);
+      this.setState({
+        latitude : parsedCoords.lat,
+        longitude : parsedCoords.lng
+      });
+      window.kakao.maps.load(() => {
+        let container = document.getElementById('map');
+        let options = {
+          // center: new window.kakao.maps.LatLng(37.506502, 127.053617),
+          center: new window.kakao.maps.LatLng(
+            this.state.latitude,
+            this.state.longitude
+          ),
+          level: 8,
+        };
+        this.map = new window.kakao.maps.Map(container, options);
+      });
+      this.makeMarkerMyPos();
+
+      this.makeArrayPatient();
+    }
+  }
 
   render() {
     return (
@@ -227,7 +257,7 @@ class Map extends Component {
             <li className="navOrg">🟠 2~4 일 사이</li>
             <li className="navRed">🔴 1일 이내</li>
           </ul>
-          <a href="#" id="btn-reload" onClick={()=>window.location.reload()}>◉</a>
+          <a href="#" id="btn-reload" onClick={this.btn_reload}>◉</a>
         </div>
         {/* <InfectedMarker /> */}
       </>
