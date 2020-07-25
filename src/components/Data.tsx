@@ -21,30 +21,35 @@ const Data = (props : DataProps) => {
 
   const init = () => {
     let CountPatient = props.patientNum;
+    const Container : any = document.getElementById('dataContainer');
     if(CountPatient < 1){
       setState({
         conditionState : 'good',
         conditionTxt : '아주 좋습니다',
         conditionFace : '🥰',
       });
+      Container.style.backgroundColor = "white";
     } else if ( 1 <= CountPatient && CountPatient <=2 ){
       setState({
         conditionState : 'soso',
         conditionTxt : '조금 위험합니다',
         conditionFace : '🙂',
       });
+      Container.style.backgroundColor = "#b8e994";
     } else if ( 3 <= CountPatient && CountPatient <= 5 ){
       setState({
         conditionState : 'bad',
         conditionTxt : '위험합니다',
         conditionFace : '😣',
       });
+      Container.style.backgroundColor = "#f6e58d";
     } else if ( 6<= CountPatient ) {
       setState({
         conditionState : 'terr',
         conditionTxt : '외 출 금 지',
         conditionFace : '🤬',
       });
+      Container.style.backgroundColor = "#ea8685";
     }
   }
 
