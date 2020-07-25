@@ -27,6 +27,8 @@ const Map = () => {
   const [countInCircle,setCountInCircle] = useState(0);
   const [latitude, setLatitude] = useState(37.4882);
   const [longitude, setLongitude] = useState(127.1026);
+  const [search,setSearch] = useState('검색할 주소');
+  const [formState,setFormState] = useState('none');
   const mounted = true;
 
   const onEvent = (event: any) => {
@@ -80,8 +82,8 @@ const Map = () => {
     return dis;
   }
 
-  let PatientInfo : Object[] = [];
   const makeArrayPatient = () => {
+    let PatientInfo : Object[] = [];
     if(Patient.mapData) {
       Patient.data.map((value) => {
         let daysGap : number;
@@ -201,12 +203,69 @@ const Map = () => {
           ),
           level: 8,
         };
+        console.log('map render2');
         map = new window.kakao.maps.Map(container, options);
       });
       makeMarkerMyPos();
 
       makeArrayPatient();
     }
+  }
+
+  const btn_search = () => {
+    const form : any= document.querySelector('.form-search');
+    if(formState === 'none'){
+      form.classList.remove('none');
+      form.classList.add('show');
+      setFormState('show');
+      alert(`지역 검색은 가능하지만 코로나 맵은 보지 못하기에 아직 미완성인 기능입니다.`);
+    } else {
+      form.classList.remove('show');
+      form.classList.add('none');
+      setFormState('none');
+    }
+  }
+
+  const onChangeSearch = (e : any) =>{
+    setSearch(e.target.value);
+  }
+
+  const onSubmitForm = (e : any) => {
+    e.preventDefault();
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+      mapOption = {
+          center: new window.kakao.maps.LatLng(longitude, latitude), // 지도의 중심좌표
+          level: 4 // 지도의 확대 레벨
+      };  
+
+    // 지도를 생성합니다    
+    var map = new window.kakao.maps.Map(mapContainer, mapOption); 
+
+    let geocoder : any= new window.kakao.maps.services.Geocoder();
+
+    geocoder.addressSearch(search, function(result : any, status : any) {
+
+      // 정상적으로 검색이 완료됐으면 
+      if (status === window.kakao.maps.services.Status.OK) {
+        var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new window.kakao.maps.Marker({
+          map: map,
+          position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new window.kakao.maps.InfoWindow({
+          content: search
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+        makeArrayPatient();
+      } 
+    });
   }
 
   useEffect(() => {
@@ -220,7 +279,8 @@ const Map = () => {
 
     script.onload = () => {
       window.kakao.maps.load(() => {
-        let container = document.getElementById('map');
+        let container : any= document.getElementById('map');
+
         let options = {
           // center: new window.kakao.maps.LatLng(37.506502, 127.053617),
           center: new window.kakao.maps.LatLng(
@@ -229,6 +289,7 @@ const Map = () => {
           ),
           level: 8,
         };
+        console.log('map render1');
         map = new window.kakao.maps.Map(container, options);
       });
 
@@ -239,7 +300,6 @@ const Map = () => {
       const coordObj = {
         lat: latitude,
         lng: longitude,
-        hi:"hello"
       };
       if (latitude !== 37.4882) saveCoords(coordObj);
 
@@ -262,7 +322,11 @@ const Map = () => {
           <li className="navOrg">🟠 2~4 일 사이</li>
           <li className="navRed">🔴 1일 이내</li>
         </ul>
-        <a href="#" id="btn-reload" onClick={btn_reload}>◉</a>
+        <form className="form-search none" onSubmit={onSubmitForm}>
+          <input type="text" value={search} onChange={onChangeSearch}/>
+        </form>
+        <a href="#" id="btn-search" onClick={btn_search}>🔎</a>
+        <a href="#" id="btn-reload" onClick={btn_reload}>🧭</a>
       </div>
       <AlertModal idNum={0} contents={[
                             "위치 조정 후 우측 하단의 알리미 버튼으로 위험도 볼 수 있습니다",
