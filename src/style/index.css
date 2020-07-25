@@ -52,10 +52,10 @@ code {
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.6);
   width: 4rem;
   text-align: center;
-  border-bottom: 0.2rem solid #1c567e;
+  border-bottom: 0.08rem solid #1c567e;
 }
 #btn-back:active{
-  transform: translateY(0.2rem);
+  transform: translateY(0.08rem);
   border-bottom: none;
 }
 .btn{
@@ -76,11 +76,11 @@ code {
   bottom: .8rem;
 }
 #btn-reload:active, #btn-search:active{
-  transform: translateY(0.2rem);
+  transform: translateY(0.12rem);
   border-bottom: none;
 }
 #btn-reload, #btn-search {
-  border-bottom: 0.2rem solid gray;
+  border-bottom: 0.12rem solid gray;
 }
 #btn-search {
   left: 7rem;
@@ -94,7 +94,7 @@ code {
 .form-search{
   /* display: none; */
   position: absolute;
-  left: 25%;
+  right: 25%;
   z-index: 10;
   width: 100px;
   height: 3rem;
@@ -112,6 +112,29 @@ code {
   border : none;
   border-radius: 0.5rem;
   color: #f1f2f6;
+}
+@media(max-width : 600px) {
+  .form-search {
+    right: 10%;
+  }
+}
+@media(max-width : 360px) {
+  .form-search {
+    top: 35%;
+    width: 84%;
+    right: 8%;
+  }
+  .form-search input {
+    width: 88%;
+  }
+}
+@media(max-width : 500px) {
+  #mylogo {
+    display: none;
+  }
+  .nav-bottom {
+    display: none;
+  }
 }
 .nav-bottom {
   position: fixed;
