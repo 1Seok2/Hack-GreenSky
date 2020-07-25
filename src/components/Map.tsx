@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Patient from '../mapData.json';
 import { Link } from 'react-router-dom';
+import Data from './Data';
 // import useGeolocation from './useGeolocation';
 
 declare global {
@@ -21,6 +22,7 @@ class Map extends Component {
     speed: null,
     timestamp: Date.now(),
     error: false,
+    countInCircle : 0,
   };
   mounted = true;
   //watchId: any;
@@ -65,6 +67,18 @@ class Map extends Component {
     }
     return gap;
   }
+  positionDistance = (lat : number, lng : number, _lat : number, _lng : number) : number => {
+    let dis = 0;
+    console.log("?",lat,_lat);
+    let disLat : number = Math.abs(lat-_lat);
+    let disLng = Math.abs(lng-_lng);
+    console.log('dis ',disLat,disLng);
+    dis = Math.sqrt(Math.pow((disLat%100 * 88804 + Math.floor((disLat-disLat%100)*100)*1480
+          + (disLat*100-Math.floor(disLat*100))*24.668),2)
+          + Math.pow((disLng%100 * 88804 + Math.floor((disLng-disLng%100)*100)*1480
+          + (disLng*100-Math.floor(disLng*100))*24.668),2));
+    return dis;
+  }
 
   PatientInfo : Object[] = [];
   makeArrayPatient = () => {
@@ -90,9 +104,20 @@ class Map extends Component {
           } else if (4 < daysGap && daysGap <=9){
             this.makeMarkerInfected(patient, this.colorGrn);
           }
+
+          let distance : number;
+          distance = this.positionDistance(this.state.latitude,this.state.longitude,patient.lat,patient.lng);
+          if(distance < 2400){
+            this.AddCount();
+          }
         }
       });
     }
+  }
+  AddCount = () => {
+    this.setState({
+      countInCircle : this.state.countInCircle + 1
+    })
   }
 
 
@@ -135,37 +160,6 @@ class Map extends Component {
       this.makeArrayPatient();
     };
   }
-
-  // displayMarker(_map : any, locPosition : any) {
-
-  //     // 마커를 생성합니다
-  //     var marker = new window.kakao.maps.Marker({
-  //         map: _map,
-  //         position: locPosition
-  //     });
-
-  //     var iwRemoveable = true;
-
-  //     // 인포윈도우를 생성합니다
-  //     var infowindow = new window.kakao.maps.InfoWindow({
-  //         removable : iwRemoveable
-  //     });
-
-  //     // 인포윈도우를 마커위에 표시합니다
-  //     infowindow.open(_map, marker);
-
-  //     // 지도 중심좌표를 접속위치로 변경합니다
-  //     _map.setCenter(locPosition);
-  // }
-
-  componentWillUnmount() {
-    // localStorage.removeItem('coords');
-  }
-
-  onClickPos = () => {
-    localStorage.removeItem('coords');
-    window.location.reload();
-  };
 
   makeMarkerMyPos = () => {
     var markerPosition = new window.kakao.maps.LatLng(
@@ -223,53 +217,21 @@ class Map extends Component {
     return (
       <>
         <div id="map">
+          <Data lat={this.state.latitude} 
+                lng={this.state.longitude}
+                patientNum={this.state.countInCircle}
+          />
           <ul className="mapNav">
+            <li>확진자 발생 추이</li>
             <li className="navGrn">🟢 5~9 일 사이</li>
             <li className="navOrg">🟠 2~4 일 사이</li>
             <li className="navRed">🔴 1일 이내</li>
           </ul>
-          <Link to="/data" className="btn-back">BACK</Link>
-          <div id="btn-reload" onClick={this.onClickPos}>◉</div>
+          <a href="#" id="btn-reload" onClick={()=>window.location.reload()}>◉</a>
         </div>
         {/* <InfectedMarker /> */}
       </>
     );
   }
 }
-// declare global {
-//     interface Window {
-//       kakao: any;
-//     }
-// }
-
-// const Map = () => {
-//     const Geolocation = useGeolocation();
-
-//     const MyLocation = {
-//         lat: Geolocation.latitude,
-//         lng: Geolocation.longitude,
-//     };
-
-//     console.log('myLoc: ', MyLocation);
-
-//     useEffect(() => {
-
-//         let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-//         let options = { //지도를 생성할 때 필요한 기본 옵션
-//           center: new window.kakao.maps.LatLng(MyLocation.lat, MyLocation.lng), //지도의 중심좌표.
-//           level: 3 //지도의 레벨(확대, 축소 정도)
-//         };
-
-//         let map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-
-//     }, []);
-
-//     return (
-//         <>
-//             {MyLocation.lat} / {MyLocation.lng}
-//             <div id="map"></div>
-//         </>
-//     );
-// }
-
 export default Map;
