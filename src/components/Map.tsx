@@ -47,7 +47,7 @@ class Map extends Component {
     console.log('error: ', error);
   };
 
-  map: any;
+  map: any; 
 
   today = new Date();
   year = this.today.getFullYear();
