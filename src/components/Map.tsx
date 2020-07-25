@@ -3,8 +3,8 @@ import React, { Component, useState, useEffect } from 'react';
 import Patient from '../mapData.json';
 import AlertModal from './alertModal';
 import { Link } from 'react-router-dom';
+import MyLogoImg from '../assets/slimgslogo.jpg';
 import Data from './Data';
-import { parse } from 'url';
 // import useGeolocation from './useGeolocation';
 
 declare global {
@@ -245,6 +245,8 @@ const Map = () => {
     var map = new window.kakao.maps.Map(mapContainer, mapOption); 
 
     let geocoder : any= new window.kakao.maps.services.Geocoder();
+    console.log('make pat');
+    makeArrayPatient();
 
     geocoder.addressSearch(search, function(result : any, status : any) {
 
@@ -266,7 +268,6 @@ const Map = () => {
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
-        makeArrayPatient();
       } 
     });
   }
@@ -339,8 +340,8 @@ const Map = () => {
           <form className="form-search none" onSubmit={onSubmitForm}>
             <input type="text" value={search} onChange={onChangeSearch}/>
           </form>
-          <a href="#" id="btn-search" onClick={btn_search}>🔎</a>
-          <a href="#" id="btn-reload" onClick={btn_reload}>🧭</a>
+          <a href="#" className="btn" id="btn-search" onClick={btn_search}>🔎</a>
+          <a href="#" className="btn" id="btn-reload" onClick={btn_reload}>🧭</a>
       </div>
       <AlertModal idNum={0} contents={[
                             "위치 조정 후 우측 하단의 알리미 버튼으로 위험도 볼 수 있습니다",
@@ -349,7 +350,10 @@ const Map = () => {
       <AlertModal idNum={1} contents={[
                             "위치를 잡느라 좀 애먹고 있어요 😭",
                             "좌측 하단의 현위치 버튼을 천천히 4~5번 이상 눌러주세요",
-                            "약간의 오차가 있을 수 있습니다"]}/>
+                            "위치상 약간의 오차가 있을 수 있습니다"]}/>
+      <div className="nav-bottom">
+        <img id="mylogo" src={MyLogoImg} alt="logo"/>
+      </div>
       {/* <InfectedMarker /> */}
     </>
   );
