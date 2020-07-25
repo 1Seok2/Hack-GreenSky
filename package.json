@@ -46,5 +46,5 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.1.5"
   },
-  "hompage": "https://1seok2.github.io/hack-greensky"
+  "homepage": "https://1seok2.github.io/hack-greensky/"
 }
