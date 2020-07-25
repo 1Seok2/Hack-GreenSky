@@ -1,6 +1,7 @@
 // global kakao
 import React, { Component, useState, useEffect } from 'react';
 import Patient from '../mapData.json';
+import AlertModal from './alertModal';
 import { Link } from 'react-router-dom';
 import Data from './Data';
 import { parse } from 'url';
@@ -70,10 +71,8 @@ const Map = () => {
 
   const positionDistance = (lat : number, lng : number, _lat : number, _lng : number) : number => {
     let dis = 0;
-    console.log("?",lat,_lat);
     let disLat : number = Math.abs(lat-_lat);
     let disLng = Math.abs(lng-_lng);
-    console.log('dis ',disLat,disLng);
     dis = Math.sqrt(Math.pow((disLat%100 * 88804 + Math.floor((disLat-disLat%100)*100)*1480
           + (disLat*100-Math.floor(disLat*100))*24.668),2)
           + Math.pow((disLng%100 * 88804 + Math.floor((disLng-disLng%100)*100)*1480
@@ -97,7 +96,6 @@ const Map = () => {
             day : value.day
           }
           PatientInfo = [...PatientInfo, patient];
-          console.log(daysGap);
           if(daysGap <= 1){
             makeMarkerInfected(patient, colorRed);
           } else if (1 < daysGap && daysGap <= 4){
@@ -109,6 +107,7 @@ const Map = () => {
           let distance : number;
           distance = positionDistance(latitude,longitude,patient.lat,patient.lng);
           if(distance < 3600){
+            console.log("paInfo : ",patient.lat,patient.lng,distance);
             AddCount();
           }
         }
@@ -265,6 +264,14 @@ const Map = () => {
         </ul>
         <a href="#" id="btn-reload" onClick={btn_reload}>◉</a>
       </div>
+      <AlertModal idNum={0} contents={[
+                            "위치 조정 후 우측 하단의 알리미 버튼으로 위험도 볼 수 있습니다",
+                            "좌측 상단의 원들은 확진 판정 받은 환자가",
+                            "며칠 전에 어디서 판정 받았는지를 나타냅니다"]}/>
+      <AlertModal idNum={1} contents={[
+                            "위치를 잡느라 좀 애먹고 있어요 😭",
+                            "좌측 하단의 현위치 버튼을 천천히 4~5번 이상 눌러주세요",
+                            "약간의 오차가 있을 수 있습니다"]}/>
       {/* <InfectedMarker /> */}
     </>
   );
