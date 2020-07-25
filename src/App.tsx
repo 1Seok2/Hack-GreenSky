@@ -6,8 +6,8 @@ import Map from './components/Map';
 const App = () => {
   return (
     <BrowserRouter>
-      <Route path="/" exact component={Data} />
-      <Route path="/map" component={Map} />
+      <Route path="/data" exact component={Data} />
+      <Route path="/" component={Map} />
     </BrowserRouter>
   );
 };

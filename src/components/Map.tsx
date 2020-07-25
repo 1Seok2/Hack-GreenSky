@@ -228,7 +228,7 @@ class Map extends Component {
             <li className="navOrg">🟠 2~4 일 사이</li>
             <li className="navRed">🔴 1일 이내</li>
           </ul>
-          <Link to="/" className="btn-back">BACK</Link>
+          <Link to="/data" className="btn-back">BACK</Link>
           <div id="btn-reload" onClick={this.onClickPos}>◉</div>
         </div>
         {/* <InfectedMarker /> */}

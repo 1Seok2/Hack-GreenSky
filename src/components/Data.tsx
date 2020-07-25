@@ -212,7 +212,7 @@ class Data extends Component {
             <p>주변 코로나환자수 :  {this.state.countInCircle}</p>
           </div>
         </div>
-        <Link to="/map" className="btn-back">MAP</Link>
+        <Link to="/" className="btn-back">MAP</Link>
         <div id="btn-reload" onClick={this.onClickPos}>◉</div>
       </div>
     );
