@@ -28,7 +28,7 @@ Runs the app in the development mode.<br />
 # in mobile version
 
 ## if it catch your coords..
-![main_mobile](https://user-images.githubusercontent.com/49581472/88484393-2f682b00-cfa9-11ea-8a23-2a8f593f2c94.jpeg){: width="30%" height="30%"}
+![main_mobile](https://user-images.githubusercontent.com/49581472/88484393-2f682b00-cfa9-11ea-8a23-2a8f593f2c94.jpeg){: width="200"}
 
 ## gotomap
-![map_mobile](https://user-images.githubusercontent.com/49581472/88484437-663e4100-cfa9-11ea-9472-94bd6d040dd4.jpeg){: width="30%" height="30%"}
+![map_mobile](https://user-images.githubusercontent.com/49581472/88484437-663e4100-cfa9-11ea-9472-94bd6d040dd4.jpeg){: width="200" }
