@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ModalContent from './ModalConents';
 import '../style/alertModal.css';
 
 interface ModalProps {
@@ -17,9 +18,9 @@ const AlertModal = (props : ModalProps) => {
                 <div className="modal">
                     <div className="modal-exit"><a onClick={onClickClose}>X</a></div>
                     <div className="modal-content">
-                        <p>{props.contents[0]}</p>
-                        <p>{props.contents[1]}</p>
-                        <p>{props.contents[2]}</p>
+                        {props.contents.map((value) => {
+                            return <ModalContent key={value} content={value}/>
+                        })}
                     </div>
                 </div>
             </div>

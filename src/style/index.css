@@ -27,7 +27,7 @@ code {
   padding-left: 0.6rem;
   padding-right: 0.6rem;
   background-color: white;
-  z-index: 99;
+  z-index: 59;
   position: absolute;
   top: 10px;
   left: 1rem;
@@ -36,7 +36,7 @@ code {
 }
 .mapNav li {
   list-style: none;
-  z-index: 99;
+  z-index: 60;
 }
 #btn-back {
   position: absolute;
@@ -84,6 +84,7 @@ code {
 }
 #btn-search {
   left: 7rem;
+  z-index: 10;
 }
 .none {
   display: none;

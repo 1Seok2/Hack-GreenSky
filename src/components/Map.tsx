@@ -23,7 +23,12 @@ const Map = () => {
     speed: null,
     timestamp: Date.now(),
     error: false,
-  })
+  });
+  const [stateAlami, setStateAlami] = useState({
+    conditionFace : '',
+    conditionState : '',
+    conditionTxt : '위치 조정 해주세요',
+  });
   const [countInCircle,setCountInCircle] = useState(0);
   const [latitude, setLatitude] = useState(37.4882);
   const [longitude, setLongitude] = useState(127.1026);
@@ -174,6 +179,7 @@ const Map = () => {
   };
 
   const btn_reload = () => {
+    init();
     const loadedCoords = localStorage.getItem('coords');
     if(loadedCoords === null) {
       console.log('nonal');
@@ -181,23 +187,13 @@ const Map = () => {
     } else {
       console.log('already');
       const parsedCoords = JSON.parse(loadedCoords);
-      setState({
-        accuracy: null,
-        altitude: null,
-        altitudeAccuracy: null,
-        heading: null,
-        speed: null,
-        timestamp: Date.now(),
-        error: false,
-      });
       setLatitude(parsedCoords.lat);
-      setLongitude (parsedCoords.lng);
+      setLongitude(parsedCoords.lng);
       setCountInCircle(0);
       window.kakao.maps.load(() => {
         DeleteMapElements();
         let container = document.getElementById('map');
         let options = {
-          // center: new window.kakao.maps.LatLng(37.506502, 127.053617),
           center: new window.kakao.maps.LatLng(
             latitude,
             longitude
@@ -206,6 +202,28 @@ const Map = () => {
         };
         console.log('map render2');
         map = new window.kakao.maps.Map(container, options);
+        let geocoder = new window.kakao.maps.services.Geocoder();
+
+        const searchAddrFromCoords = (coords : any, callback : any) : void=> {
+          // 좌표로 행정동 주소 정보를 요청합니다
+          geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+        }
+        const displayCenterInfo = (result : any, status : any) => {
+          if (status === window.kakao.maps.services.Status.OK) {
+            var infoDiv : any = document.getElementById('centerAddr');
+            for(var i = 0; i < result.length; i++) {
+              // 행정동의 region_type 값은 'H' 이므로
+              if (result[i].region_type === 'H') {
+                infoDiv.innerHTML = result[i].address_name;
+                break;
+              }
+            }
+          }    
+        }
+        // 현재 지도 중심좌표로 주소를 검색해서 상단에 표시합니다
+        searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+
+      
       });
       makeMarkerMyPos();
 
@@ -270,11 +288,47 @@ const Map = () => {
         map.setCenter(coords);
       } 
     });
+    setCountInCircle(0);
+    makeArrayPatient();
+    console.log('maked');
   }
   
   const DeleteMapElements = () => {
     let deleteMap : any = document.getElementById("map");
     while ( deleteMap.hasChildNodes() ) { deleteMap.removeChild( deleteMap.firstChild ); }
+  }
+
+  const init = () => {
+    const Container : any = document.getElementById('dataContainer');
+    if(countInCircle < 1){
+      setStateAlami({
+        conditionState : 'good',
+        conditionTxt : '아주 좋습니다',
+        conditionFace : '🥰',
+      });
+      Container.style.backgroundColor = "white";
+    } else if ( 1 <= countInCircle && countInCircle <=2 ){
+      setStateAlami({
+        conditionState : 'soso',
+        conditionTxt : '조금 위험합니다',
+        conditionFace : '🙂',
+      });
+      Container.style.backgroundColor = "#b8e994";
+    } else if ( 3 <= countInCircle && countInCircle <= 5 ){
+      setStateAlami({
+        conditionState : 'bad',
+        conditionTxt : '위험합니다',
+        conditionFace : '😣',
+      });
+      Container.style.backgroundColor = "#f6e58d";
+    } else if ( 6<= countInCircle ) {
+      setStateAlami({
+        conditionState : 'terr',
+        conditionTxt : '외 출 금 지',
+        conditionFace : '🤬',
+      });
+      Container.style.backgroundColor = "#ea8685";
+    }
   }
 
   useEffect(() => {
@@ -317,6 +371,7 @@ const Map = () => {
 
       makeArrayPatient();
     };
+    init();
     return(() =>{
       DeleteMapElements()
     });
@@ -330,6 +385,7 @@ const Map = () => {
         <Data lat={latitude} 
                 lng={longitude}
                 patientNum={countInCircle}
+                alami={stateAlami}
           />
           <ul className="mapNav">
             <li>확진자 발생 추이</li>
@@ -350,6 +406,7 @@ const Map = () => {
       <AlertModal idNum={1} contents={[
                             "위치를 잡느라 좀 애먹고 있어요 😭",
                             "좌측 하단의 현위치 버튼을 천천히 4~5번 이상 눌러주세요",
+                            "누를수록 위치를 빨리 찾습니다",
                             "위치상 약간의 오차가 있을 수 있습니다"]}/>
       <div className="nav-bottom">
         <img id="mylogo" src={MyLogoImg} alt="logo"/>
