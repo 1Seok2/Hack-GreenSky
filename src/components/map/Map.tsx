@@ -1,10 +1,10 @@
 // global kakao
 import React, { Component, useState, useEffect } from 'react';
-import AlertModal from './alertModal';
+import AlertModal from '../modal/alertModal';
 import { Link } from 'react-router-dom';
-import Patient from '../InfectedData.json';
-import MyLogoImg from '../assets/slimgslogo.jpg';
-import Data from './Data';
+import Patient from '../../InfectedData.json';
+import MyLogoImg from '../../assets/slimgslogo.jpg';
+import Data from '../alami/Data';
 // import useGeolocation from './useGeolocation';
 
 declare global {
@@ -303,31 +303,31 @@ const Map = () => {
     if(countInCircle < 1){
       setStateAlami({
         conditionState : 'good',
-        conditionTxt : '아주 좋습니다',
-        conditionFace : '🥰',
+        conditionTxt : '좋음',
+        conditionFace : 'icon-smile',
       });
-      Container.style.backgroundColor = "white";
+      Container.style.backgroundColor = "#1289A7";
     } else if ( 1 <= countInCircle && countInCircle <=2 ){
       setStateAlami({
         conditionState : 'soso',
-        conditionTxt : '조금 위험합니다',
-        conditionFace : '🙂',
+        conditionTxt : '조금 위험',
+        conditionFace : 'icon-meh',
       });
-      Container.style.backgroundColor = "#b8e994";
+      Container.style.backgroundColor = "#009432";
     } else if ( 3 <= countInCircle && countInCircle <= 5 ){
       setStateAlami({
         conditionState : 'bad',
-        conditionTxt : '위험합니다',
-        conditionFace : '😣',
+        conditionTxt : '위험',
+        conditionFace : 'icon-frown',
       });
-      Container.style.backgroundColor = "#f6e58d";
+      Container.style.backgroundColor = "#cc8e35";
     } else if ( 6<= countInCircle ) {
       setStateAlami({
         conditionState : 'terr',
-        conditionTxt : '외 출 금 지',
-        conditionFace : '🤬',
+        conditionTxt : '매우 위험',
+        conditionFace : 'icon-emo-devil',
       });
-      Container.style.backgroundColor = "#ea8685";
+      Container.style.backgroundColor = "#b33939";
     }
   }
 
@@ -383,21 +383,21 @@ const Map = () => {
       </div>
       <div className="options">
         <Data lat={latitude} 
-                lng={longitude}
-                patientNum={countInCircle}
-                alami={stateAlami}
-          />
-          <ul className="mapNav">
-            <li>확진자 발생 추이</li>
-            <li className="navGrn">🟢 5~9 일 사이</li>
-            <li className="navOrg">🟠 2~4 일 사이</li>
-            <li className="navRed">🔴 1일 이내</li>
-          </ul>
-          <form className="form-search none" onSubmit={onSubmitForm}>
-            <input type="text" value={search} onChange={onChangeSearch}/>
-          </form>
-          <a href="#" className="btn" id="btn-search" onClick={btn_search}>🔎</a>
-          <a href="#" className="btn" id="btn-reload" onClick={btn_reload}>🧭</a>
+              lng={longitude}
+              patientNum={countInCircle}
+              alami={stateAlami}
+        />
+        <ul className="mapNav">
+          <li>확진자 발생 추이</li>
+          <li className="navGrn">🟢 5~9 일 사이</li>
+          <li className="navOrg">🟠 2~4 일 사이</li>
+          <li className="navRed">🔴 1일 이내</li>
+        </ul>
+        <form className="form-search none" onSubmit={onSubmitForm}>
+          <input type="text" value={search} onChange={onChangeSearch}/>
+        </form>
+        <a href="#" className="btn" id="btn-search" onClick={btn_search}><i className="icon-search"></i></a>
+        <a href="#" className="btn" id="btn-reload" onClick={btn_reload}><i className="icon-location"></i></a>
       </div>
       <AlertModal idNum={0} contents={[
                             "위치 조정 후 우측 하단의 알리미 버튼으로 위험도 볼 수 있습니다",

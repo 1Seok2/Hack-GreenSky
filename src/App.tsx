@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import Data from './components/Data';
-import Map from './components/Map';
+import Data from './components/alami/Data';
+import Map from './components/map/Map';
 
 const App = () => {
   return (

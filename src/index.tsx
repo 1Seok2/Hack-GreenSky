@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './style/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Map from './components/Map';
-import Data from './components/Data';
+import Map from './components/map/Map';
+import Data from './components/alami/Data';
 
 ReactDOM.render(
   <React.StrictMode>

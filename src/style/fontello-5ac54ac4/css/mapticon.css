@@ -1,11 +1,11 @@
 @font-face {
-  font-family: 'coronaface';
-  src: url('../font/coronaface.eot?57237405');
-  src: url('../font/coronaface.eot?57237405#iefix') format('embedded-opentype'),
-       url('../font/coronaface.woff2?57237405') format('woff2'),
-       url('../font/coronaface.woff?57237405') format('woff'),
-       url('../font/coronaface.ttf?57237405') format('truetype'),
-       url('../font/coronaface.svg?57237405#coronaface') format('svg');
+  font-family: 'mapticon';
+  src: url('../font/mapticon.eot?5508511');
+  src: url('../font/mapticon.eot?5508511#iefix') format('embedded-opentype'),
+       url('../font/mapticon.woff2?5508511') format('woff2'),
+       url('../font/mapticon.woff?5508511') format('woff'),
+       url('../font/mapticon.ttf?5508511') format('truetype'),
+       url('../font/mapticon.svg?5508511#mapticon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,14 +14,14 @@
 /*
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
-    font-family: 'coronaface';
-    src: url('../font/coronaface.svg?57237405#coronaface') format('svg');
+    font-family: 'mapticon';
+    src: url('../font/mapticon.svg?5508511#mapticon') format('svg');
   }
 }
 */
  
  [class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "coronaface";
+  font-family: "mapticon";
   font-style: normal;
   font-weight: normal;
   speak: never;
@@ -55,7 +55,15 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
-.icon-emo-happy:before { content: '\e800'; } /* '' */
-.icon-emo-wink:before { content: '\e801'; } /* '' */
-.icon-emo-unhappy:before { content: '\e802'; } /* '' */
-.icon-emo-devil:before { content: '\e805'; } /* '' */
+.icon-location:before { content: '\e800'; } /* '' */
+.icon-target:before { content: '\e801'; } /* '' */
+.icon-search:before { content: '\e802'; } /* '' */
+.icon-emo-unhappy:before { content: '\e804'; } /* '' */
+.icon-emo-wink:before { content: '\e805'; } /* '' */
+.icon-emo-devil:before { content: '\e806'; } /* '' */
+.icon-emo-laugh:before { content: '\e812'; } /* '' */
+.icon-menu:before { content: '\f0c9'; } /* '' */
+.icon-smile:before { content: '\f118'; } /* '' */
+.icon-frown:before { content: '\f119'; } /* '' */
+.icon-meh:before { content: '\f11a'; } /* '' */
+.icon-map-o:before { content: '\f278'; } /* '' */
