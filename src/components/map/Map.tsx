@@ -7,6 +7,8 @@ import MyLogoImg from '../../assets/slimgslogo.jpg';
 import Data from '../alami/Data';
 // import useGeolocation from './useGeolocation';
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 declare global {
   interface Window {
     kakao: any;
@@ -28,6 +30,7 @@ const Map = () => {
     conditionFace : '',
     conditionState : '',
     conditionTxt : '위치 조정 해주세요',
+    conditionBgColor : '#1289A7'
   });
   const [countInCircle,setCountInCircle] = useState(0);
   const [latitude, setLatitude] = useState(37.4882);
@@ -305,41 +308,44 @@ const Map = () => {
         conditionState : 'good',
         conditionTxt : '좋음',
         conditionFace : 'icon-smile',
+        conditionBgColor : '#1289A7'
       });
-      Container.style.backgroundColor = "#1289A7";
     } else if ( 1 <= countInCircle && countInCircle <=2 ){
       setStateAlami({
         conditionState : 'soso',
         conditionTxt : '조금 위험',
         conditionFace : 'icon-meh',
+        conditionBgColor : '#009432'
       });
-      Container.style.backgroundColor = "#009432";
     } else if ( 3 <= countInCircle && countInCircle <= 5 ){
       setStateAlami({
         conditionState : 'bad',
         conditionTxt : '위험',
         conditionFace : 'icon-frown',
+        conditionBgColor : '#cc8e35'
       });
-      Container.style.backgroundColor = "#cc8e35";
     } else if ( 6<= countInCircle ) {
       setStateAlami({
         conditionState : 'terr',
         conditionTxt : '매우 위험',
         conditionFace : 'icon-emo-devil',
+        conditionBgColor : '#b33939'
       });
-      Container.style.backgroundColor = "#b33939";
     }
+    Container.style.backgroundColor = stateAlami.conditionBgColor;
   }
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(onEvent, onError);
+    
     //this.watchId = navigator.geolocation.watchPosition(this.onEvent, this.onError);
     const script = document.createElement('script');
     script.async = true;
     script.src =
-      'https://dapi.kakao.com/v2/maps/sdk.js?appkey=791da7c461cd99413eb956eb82eadf43';
+      `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${API_KEY}`;
     document.head.appendChild(script);
-
+    
+    
     script.onload = () => {
       window.kakao.maps.load(() => {
         DeleteMapElements();
@@ -386,6 +392,7 @@ const Map = () => {
               lng={longitude}
               patientNum={countInCircle}
               alami={stateAlami}
+              bgColor={stateAlami.conditionBgColor}
         />
         <ul className="mapNav">
           <li>확진자 발생 추이</li>

@@ -8,7 +8,8 @@ interface DataProps {
   lat : number,
   lng : number,
   patientNum : number,
-  alami : any
+  alami : any,
+  bgColor : string
 }
 
 const Data = (props : DataProps) => {
@@ -68,7 +69,7 @@ const Data = (props : DataProps) => {
   return (
     <>
       <div className="dataContainer show" id="dataContainer">
-        <OtherMenu />
+        <OtherMenu bgColor={props.bgColor}/>
         <div className="alami-wrapper">
           <div className="header">
             {/* 현 주소와 시간 표시 */}
