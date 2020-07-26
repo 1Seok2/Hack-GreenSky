@@ -10,15 +10,11 @@ and then, change directory to cloned repository,
 ### `npm install`
 
 Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
 ### `npm start`
 
 
-# This shows you...
+# This shows you... (safari maybe not working)
 
 ## start page (didnt catch your coords)
 <img width="1280" alt="main" src="https://user-images.githubusercontent.com/49581472/88484283-6984fd00-cfa8-11ea-904a-e56827736f74.png">
@@ -28,3 +24,11 @@ You will also see any lint errors in the console.
 
 ## gotomap
 <img width="1280" alt="map" src="https://user-images.githubusercontent.com/49581472/88484284-6be75700-cfa8-11ea-9185-19d69c8efa27.png">
+
+# in mobile version
+
+## if it catch your coords..
+![main_mobile](https://user-images.githubusercontent.com/49581472/88484393-2f682b00-cfa9-11ea-8a23-2a8f593f2c94.jpeg)
+
+## gotomap
+![map_mobile](https://user-images.githubusercontent.com/49581472/88484437-663e4100-cfa9-11ea-9472-94bd6d040dd4.jpeg)
