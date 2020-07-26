@@ -39,7 +39,7 @@ code {
   z-index: 60;
 }
 #btn-back {
-  position: absolute;
+  position: fixed;
   font-size: 2.3rem;
   z-index: 99;
   color: black;
@@ -56,7 +56,7 @@ code {
   height: 3.4rem;
   text-decoration: none;
   color: rgba(0, 0, 0, 0.6);
-  position: absolute;
+  position: fixed;
   font-size: 2.3rem;
   z-index: 99;
   font-weight: bold;
