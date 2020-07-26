@@ -29,5 +29,5 @@ Runs the app in the development mode.<br />
 
 ## if it catch your coords..
 <img src="https://user-images.githubusercontent.com/49581472/88484393-2f682b00-cfa9-11ea-8a23-2a8f593f2c94.jpeg" width=300px />
-## gotomap
+## gotomap_mobile
 <img src="https://user-images.githubusercontent.com/49581472/88484437-663e4100-cfa9-11ea-9472-94bd6d040dd4.jpeg" width=300px />
