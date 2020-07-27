@@ -101,29 +101,27 @@ code {
 }
 @media(max-width : 600px) {
   .form-search {
-    right: 10%;
+    right: 7.6rem;
   }
 }
-@media(max-width : 360px) {
-  .form-search {
-    top: 35%;
-    width: 84%;
-    right: 8%;
-  }
-  .form-search input {
-    width: 88%;
-  }
+@media(max-width : 480px) {
+  .form-search{
+    width: 248px;
+    left: 44%;
+    top: 30%;
+    transform: translate(-50%,-50%);
+  };
 }
 @media(max-width : 500px) {
   #mylogo {
     display: none;
-  }
+  };
   .nav-bottom {
     display: none;
-  }
+  };
   #map {
     height: 100vh;
-  }
+  };
 }
 .nav-bottom {
   position: fixed;
