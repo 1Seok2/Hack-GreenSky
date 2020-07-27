@@ -1,13 +1,13 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Data from './components/alami/Data';
 import Map from './components/map/Map';
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter basename={process.env.PUBLIC_URL}>
       <Route path="/" component={Map} />
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
