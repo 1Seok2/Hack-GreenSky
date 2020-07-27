@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'mapticon';
-  src: url('../font/mapticon.eot?40913824');
-  src: url('../font/mapticon.eot?40913824#iefix') format('embedded-opentype'),
-       url('../font/mapticon.woff2?40913824') format('woff2'),
-       url('../font/mapticon.woff?40913824') format('woff'),
-       url('../font/mapticon.ttf?40913824') format('truetype'),
-       url('../font/mapticon.svg?40913824#mapticon') format('svg');
+  src: url('../font/mapticon.eot?72349084');
+  src: url('../font/mapticon.eot?72349084#iefix') format('embedded-opentype'),
+       url('../font/mapticon.woff2?72349084') format('woff2'),
+       url('../font/mapticon.woff?72349084') format('woff'),
+       url('../font/mapticon.ttf?72349084') format('truetype'),
+       url('../font/mapticon.svg?72349084#mapticon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'mapticon';
-    src: url('../font/mapticon.svg?40913824#mapticon') format('svg');
+    src: url('../font/mapticon.svg?72349084#mapticon') format('svg');
   }
 }
 */
@@ -62,8 +62,10 @@
 .icon-emo-unhappy:before { content: '\e804'; } /* '' */
 .icon-emo-wink:before { content: '\e805'; } /* '' */
 .icon-emo-devil:before { content: '\e806'; } /* '' */
+.icon-cancel:before { content: '\e807'; } /* '' */
 .icon-emo-laugh:before { content: '\e812'; } /* '' */
 .icon-menu:before { content: '\f0c9'; } /* '' */
+.icon-circle:before { content: '\f111'; } /* '' */
 .icon-smile:before { content: '\f118'; } /* '' */
 .icon-frown:before { content: '\f119'; } /* '' */
 .icon-meh:before { content: '\f11a'; } /* '' */

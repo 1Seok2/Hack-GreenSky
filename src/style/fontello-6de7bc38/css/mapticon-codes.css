@@ -6,8 +6,10 @@
 .icon-emo-unhappy:before { content: '\e804'; } /* '' */
 .icon-emo-wink:before { content: '\e805'; } /* '' */
 .icon-emo-devil:before { content: '\e806'; } /* '' */
+.icon-cancel:before { content: '\e807'; } /* '' */
 .icon-emo-laugh:before { content: '\e812'; } /* '' */
 .icon-menu:before { content: '\f0c9'; } /* '' */
+.icon-circle:before { content: '\f111'; } /* '' */
 .icon-smile:before { content: '\f118'; } /* '' */
 .icon-frown:before { content: '\f119'; } /* '' */
 .icon-meh:before { content: '\f11a'; } /* '' */

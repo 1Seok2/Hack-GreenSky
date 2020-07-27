@@ -4,7 +4,7 @@ import OtherMenu from './OtherMenu';
 import AlertModal from '../modal/alertModal';
 import Tips from './Tips'
 import '../../style/Data.css';
-import '../../style/fontello-0d3c83f1/css/mapticon-embedded.css';
+import '../../style/fontello-6de7bc38/css/mapticon-embedded.css';
 
 interface DataProps {
   lat : number,
@@ -65,8 +65,8 @@ const Data = (props : DataProps) => {
 
   useEffect(() => {
     getNowTime();
-    const Container : any = document.getElementById('dataContainer');
-    Container.style.backgroundColor = props.alami.conditionBgColor;
+    // const Container : any = document.getElementById('dataContainer');
+    // Container.style.backgroundColor = props.alami.conditionBgColor;
     console.log('rerender');
   },[nowTime.nowMin]);
 
@@ -77,8 +77,8 @@ const Data = (props : DataProps) => {
       <Tips />
       <AlertModal idNum={0} contents={[
         "⚠️ 필독 - 지도 ⚠️",
+        "확진자들의 위치가 안보일 경우 좌측 하단의 현위치 버튼을 여러번 눌러주세요",
         "해외입국자를 제외한 수치 및 표기입니다",
-        "확진자들의 위치가 안보일 경우 좌측 하단의 현위치 버튼을 눌러주세요",
         "좌측 상단의 원들은 확진 판정 받은 환자가",
         "며칠 전에 어디서 판정 받았는지를 나타냅니다",
         "우측 하단 버튼으로 알리미를 볼 수 있습니다",

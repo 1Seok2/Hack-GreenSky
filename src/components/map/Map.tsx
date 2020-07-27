@@ -192,7 +192,6 @@ const Map = () => {
   };
 
   const btn_reload = () => {
-    init();
     const loadedCoords = localStorage.getItem('coords');
     if(loadedCoords === null) {
       console.log('nonal');
@@ -242,11 +241,13 @@ const Map = () => {
 
       makeArrayPatient();
     }
+    init();
   }
 
   const btn_search = () => {
     const form : any= document.querySelector('.form-search');
     if(formState === 'none'){
+      alert('시,군,구,동 단위로 검색하세요 [ ex : 서울시청 / 입암동 / 용산구 ]');
       form.classList.remove('none');
       form.classList.add('show');
       setFormState('show');
@@ -263,44 +264,7 @@ const Map = () => {
 
   const onSubmitForm = (e : any) => {
     e.preventDefault();
-
     DeleteMapElements();
-    // var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    //   mapOption = {
-    //       center: new window.kakao.maps.LatLng(longitude, latitude), // 지도의 중심좌표
-    //       level: 4 // 지도의 확대 레벨
-    //   };  
-    
-    
-    // // 지도를 생성합니다    
-    // var map = new window.kakao.maps.Map(mapContainer, mapOption); 
-
-    // let geocoder : any= new window.kakao.maps.services.Geocoder();
-    // console.log('make pat');
-
-    // geocoder.addressSearch(search, function(result : any, status : any) {
-
-    //   // 정상적으로 검색이 완료됐으면 
-    //   if (status === window.kakao.maps.services.Status.OK) {
-    //     var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-
-    //     // 결과값으로 받은 위치를 마커로 표시합니다
-    //     var marker = new window.kakao.maps.Marker({
-    //       map: map,
-    //       position: coords
-    //     });
-
-    //     // 인포윈도우로 장소에 대한 설명을 표시합니다
-    //     var infowindow = new window.kakao.maps.InfoWindow({
-    //       content: search
-    //     });
-    //     infowindow.open(map, marker);
-
-    //     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-    //     map.setCenter(coords);
-    //   } 
-    // });
-    // console.log('maked');
     window.kakao.maps.load(() => {
       DeleteMapElements();
       let container = document.getElementById('map');
@@ -342,6 +306,11 @@ const Map = () => {
     });
     setCountInCircle(0);
     makeArrayPatient();
+    const form : any= document.querySelector('.form-search');
+    form.classList.remove('show');
+    form.classList.add('none');
+    setFormState('none');
+    setSearch('');
   }
   
   const DeleteMapElements = () => {
@@ -358,6 +327,7 @@ const Map = () => {
         conditionFace : 'icon-smile',
         conditionBgColor : '#1289A7'
       });
+      Container.style.backgroundColor = stateAlami.conditionBgColor;
     } else if ( 1 <= countInCircle && countInCircle <=2 ){
       setStateAlami({
         conditionState : 'soso',
@@ -365,6 +335,7 @@ const Map = () => {
         conditionFace : 'icon-meh',
         conditionBgColor : '#009432'
       });
+      Container.style.backgroundColor = stateAlami.conditionBgColor;
     } else if ( 3 <= countInCircle && countInCircle <= 5 ){
       setStateAlami({
         conditionState : 'bad',
@@ -372,6 +343,7 @@ const Map = () => {
         conditionFace : 'icon-frown',
         conditionBgColor : '#cc8e35'
       });
+      Container.style.backgroundColor = stateAlami.conditionBgColor;
     } else if ( 6<= countInCircle ) {
       setStateAlami({
         conditionState : 'terr',
@@ -379,8 +351,8 @@ const Map = () => {
         conditionFace : 'icon-emo-devil',
         conditionBgColor : '#b33939'
       });
+      Container.style.backgroundColor = stateAlami.conditionBgColor;
     }
-    Container.style.backgroundColor = stateAlami.conditionBgColor;
   }
 
   useEffect(() => {
@@ -440,10 +412,16 @@ const Map = () => {
               alami={stateAlami}
         />
         <ul className="mapNav">
-          <li>확진자 발생 추이</li>
-          <li className="navGrn">🟢 5~9 일 사이</li>
-          <li className="navOrg">🟠 2~4 일 사이</li>
-          <li className="navRed">🔴 1일 이내</li>
+          <li className="mapNav-list-title">확진자 발생 추이</li>
+          <li className="navGrn">
+            <i className="icon-circle icon-circle-green"></i> 5~9 일 사이
+          </li>
+          <li className="navOrg">
+            <i className="icon-circle icon-circle-orange"></i> 2~4 일 사이
+          </li>
+          <li className="navRed">
+            <i className="icon-circle icon-circle-red"></i> 1일 이내
+          </li>
         </ul>
         <form className="form-search none" onSubmit={onSubmitForm}>
           <input type="text" value={search} onChange={onChangeSearch}/>

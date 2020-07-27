@@ -83,6 +83,18 @@
       "css": "lightbulb",
       "code": 59395,
       "src": "linecons"
+    },
+    {
+      "uid": "130380e481a7defc690dfb24123a1f0c",
+      "css": "circle",
+      "code": 61713,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "8da3ac534210aae9c0f0e13804c1df97",
+      "css": "cancel",
+      "code": 59399,
+      "src": "websymbols"
     }
   ]
 }

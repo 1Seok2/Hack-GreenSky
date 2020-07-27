@@ -23,7 +23,7 @@ code {
   height: 97vh;
 }
 .mapNav {
-  font-size: 12px;
+  font-size: 1rem;
   padding: 0;
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
@@ -40,6 +40,12 @@ code {
 .mapNav li {
   list-style: none;
   z-index: 60;
+}
+.mapNav-list-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-top: .3rem;
+  padding-bottom: 0.4rem;
 }
 #btn-back {
   position: fixed;
@@ -99,6 +105,15 @@ code {
   border-radius: 0.5rem;
   color: #f1f2f6;
 }
+.icon-circle-green {
+  color: green;
+}
+.icon-circle-orange {
+  color : orange;
+}
+.icon-circle-red {
+  color : red;
+}
 @media(max-width : 600px) {
   .form-search {
     right: 7.6rem;
@@ -107,21 +122,21 @@ code {
 @media(max-width : 480px) {
   .form-search{
     width: 248px;
-    left: 44%;
+    left: 45%;
     top: 30%;
-    transform: translate(-50%,-50%);
-  };
+    transform: translate(-50%,-60%);
+  }
 }
 @media(max-width : 500px) {
   #mylogo {
     display: none;
-  };
+  }
   .nav-bottom {
     display: none;
-  };
+  }
   #map {
     height: 100vh;
-  };
+  }
 }
 .nav-bottom {
   position: fixed;

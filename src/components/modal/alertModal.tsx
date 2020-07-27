@@ -19,7 +19,11 @@ const AlertModal = (props : ModalProps) => {
                 <div className="modal">
                     <div className="modal-header">
                         공지사항 &amp; Tips
-                        <div className="modal-exit"><a onClick={onClickClose}>X</a></div>
+                        <div className="modal-exit">
+                            <a onClick={onClickClose}>
+                                <i className="icon-cancel"></i>
+                            </a>
+                        </div>
                     </div>
                     <div className="modal-content">
                         {props.contents.map((value) => {
