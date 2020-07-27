@@ -35,7 +35,7 @@ const Map = () => {
   const [countInCircle,setCountInCircle] = useState(0);
   const [latitude, setLatitude] = useState(37.4882);
   const [longitude, setLongitude] = useState(127.1026);
-  const [search,setSearch] = useState('검색할 주소');
+  const [search,setSearch] = useState('');
   const [formState,setFormState] = useState('none');
   const mounted = true;
 
@@ -91,8 +91,10 @@ const Map = () => {
   }
 
   const makeArrayPatient = () => {
+    console.log('MAP 1');
     let PatientInfo : Object[] = [];
     if(Patient.mapData) {
+      console.log('MAP 2');
       Patient.data.map((value) => {
         let daysGap : number;
         daysGap = isInFewDays(value.month, value.day);
@@ -105,14 +107,21 @@ const Map = () => {
             month : value.month,
             day : value.day
           }
+          console.log('is in ',patient.lat,patient.lng);
           PatientInfo = [...PatientInfo, patient];
           if(daysGap <= 1){
+            console.log('mark red');
             makeMarkerInfected(patient, colorRed);
           } else if (1 < daysGap && daysGap <= 4){
+            console.log('mark org');
             makeMarkerInfected(patient, colorOrg);
           } else if (4 < daysGap && daysGap <=9){
+            console.log('mark grn');
             makeMarkerInfected(patient, colorGrn);
+          } else {
+            console.log('MAP none in circle');
           }
+          console.log('MAP 3');
 
           let distance : number;
           distance = positionDistance(latitude,longitude,patient.lat,patient.lng);
@@ -129,10 +138,10 @@ const Map = () => {
     setCountInCircle((prevCount) => prevCount+1);
   }
 
-  const makeMarkerMyPos = () => {
+  const makeMarkerMyPos = (_lat : any,_lng : any) => {
     var markerPosition = new window.kakao.maps.LatLng(
-      latitude,
-      longitude
+      _lat,
+      _lng
     );
 
     // 마커를 생성합니다
@@ -145,8 +154,8 @@ const Map = () => {
     // 지도에 표시할 원을 생성합니다
     var circle = new window.kakao.maps.Circle({
       center: new window.kakao.maps.LatLng(
-        latitude,
-        longitude
+        _lat,
+        _lng
       ), // 원의 중심좌표 입니다
       radius: 2400, // 미터 단위의 원의 반지름입니다 , 대생활반경 4600 , 중생활반경 2400
       strokeWeight: 1, // 선의 두께입니다
@@ -166,7 +175,7 @@ const Map = () => {
   const colorGrn = '#27ae60';
   //patient circles
   const makeMarkerInfected = (_patient : any, color:string) => {
-    var circle = new window.kakao.maps.Circle({
+    const circle = new window.kakao.maps.Circle({
       center: new window.kakao.maps.LatLng(_patient.lat, _patient.lng), // 원의 중심좌표 입니다
       radius: 1200, // 미터 단위의 원의 반지름입니다
       strokeWeight: 1, // 선의 두께입니다
@@ -176,6 +185,7 @@ const Map = () => {
       fillColor: `${color}`, // 채우기 색깔입니다
       fillOpacity: 0.7, // 채우기 불투명도 입니다
     });
+    console.log('got is ',circle,_patient,color);
     
     // 지도에 원을 표시합니다
     circle.setMap(map);
@@ -228,7 +238,7 @@ const Map = () => {
 
       
       });
-      makeMarkerMyPos();
+      makeMarkerMyPos(latitude, longitude);
 
       makeArrayPatient();
     }
@@ -240,7 +250,6 @@ const Map = () => {
       form.classList.remove('none');
       form.classList.add('show');
       setFormState('show');
-      alert(`지역 검색은 가능하지만 코로나 맵은 보지 못하기에 아직 미완성인 기능입니다.`);
     } else {
       form.classList.remove('show');
       form.classList.add('none');
@@ -256,43 +265,83 @@ const Map = () => {
     e.preventDefault();
 
     DeleteMapElements();
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-      mapOption = {
-          center: new window.kakao.maps.LatLng(longitude, latitude), // 지도의 중심좌표
-          level: 4 // 지도의 확대 레벨
-      };  
+    // var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    //   mapOption = {
+    //       center: new window.kakao.maps.LatLng(longitude, latitude), // 지도의 중심좌표
+    //       level: 4 // 지도의 확대 레벨
+    //   };  
+    
+    
+    // // 지도를 생성합니다    
+    // var map = new window.kakao.maps.Map(mapContainer, mapOption); 
 
-    // 지도를 생성합니다    
-    var map = new window.kakao.maps.Map(mapContainer, mapOption); 
+    // let geocoder : any= new window.kakao.maps.services.Geocoder();
+    // console.log('make pat');
 
-    let geocoder : any= new window.kakao.maps.services.Geocoder();
-    console.log('make pat');
+    // geocoder.addressSearch(search, function(result : any, status : any) {
 
-    geocoder.addressSearch(search, function(result : any, status : any) {
+    //   // 정상적으로 검색이 완료됐으면 
+    //   if (status === window.kakao.maps.services.Status.OK) {
+    //     var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
 
-      // 정상적으로 검색이 완료됐으면 
-      if (status === window.kakao.maps.services.Status.OK) {
-        var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+    //     // 결과값으로 받은 위치를 마커로 표시합니다
+    //     var marker = new window.kakao.maps.Marker({
+    //       map: map,
+    //       position: coords
+    //     });
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new window.kakao.maps.Marker({
-          map: map,
-          position: coords
-        });
+    //     // 인포윈도우로 장소에 대한 설명을 표시합니다
+    //     var infowindow = new window.kakao.maps.InfoWindow({
+    //       content: search
+    //     });
+    //     infowindow.open(map, marker);
 
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new window.kakao.maps.InfoWindow({
-          content: search
-        });
-        infowindow.open(map, marker);
+    //     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    //     map.setCenter(coords);
+    //   } 
+    // });
+    // console.log('maked');
+    window.kakao.maps.load(() => {
+      DeleteMapElements();
+      let container = document.getElementById('map');
+      let options = {
+        center: new window.kakao.maps.LatLng(
+          latitude,
+          longitude
+        ),
+        level: 8,
+      };
+      console.log('map render2');
+      map = new window.kakao.maps.Map(container, options);
+      let geocoder = new window.kakao.maps.services.Geocoder();
 
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-      } 
+      geocoder.addressSearch(search, function(result : any, status : any) {
+
+        // 정상적으로 검색이 완료됐으면 
+        if (status === window.kakao.maps.services.Status.OK) {
+          var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+
+          // 결과값으로 받은 위치를 마커로 표시합니다
+          var marker = new window.kakao.maps.Marker({
+            map: map,
+            position: coords
+          });
+
+          // // 인포윈도우로 장소에 대한 설명을 표시합니다
+          // var infowindow = new window.kakao.maps.InfoWindow({
+          //   content: search
+          // });
+          // infowindow.open(map, marker);
+
+          // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+          map.setCenter(coords);
+          makeMarkerMyPos(result[0].y, result[0].x);
+        } 
+      });
+    
     });
     setCountInCircle(0);
     makeArrayPatient();
-    console.log('maked');
   }
   
   const DeleteMapElements = () => {
@@ -372,7 +421,7 @@ const Map = () => {
       };
       if (latitude !== 37.4882) saveCoords(coordObj);
 
-      makeMarkerMyPos();
+      makeMarkerMyPos(latitude,longitude);
     };
     init();
     return(() =>{
