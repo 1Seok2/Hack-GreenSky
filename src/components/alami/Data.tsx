@@ -1,15 +1,16 @@
 import React, { Component, useState, useEffect } from 'react';
 import MakeSentence from './MakeSentence';
 import OtherMenu from './OtherMenu';
+import AlertModal from '../modal/alertModal';
+import Tips from './Tips'
 import '../../style/Data.css';
-import '../../style/fontello-5ac54ac4/css/mapticon-embedded.css';
+import '../../style/fontello-0d3c83f1/css/mapticon-embedded.css';
 
 interface DataProps {
   lat : number,
   lng : number,
   patientNum : number,
-  alami : any,
-  bgColor : string
+  alami : any
 }
 
 const Data = (props : DataProps) => {
@@ -29,6 +30,7 @@ const Data = (props : DataProps) => {
     const back : any = document.getElementById('btn-back');
     const searchBtn : any = document.getElementById('btn-search');
     const reloadBtn : any = document.getElementById('btn-reload');
+    const tipsBtn : any = document.getElementsByClassName('btn-tips')[0];
     if(btnState === 'show'){
       data.classList.remove('show');
       data.classList.add('none');
@@ -37,6 +39,7 @@ const Data = (props : DataProps) => {
       back.style.color = "black";
       searchBtn.style.color = "black";
       reloadBtn.style.color = "black";
+      tipsBtn.style.color = "black";
     } else {
       data.classList.remove('none');
       data.classList.add('show');
@@ -45,6 +48,7 @@ const Data = (props : DataProps) => {
       back.style.color = "white";
       searchBtn.style.color = "white";
       reloadBtn.style.color = "white";
+      tipsBtn.style.color = "white";
     }
   };
 
@@ -61,6 +65,8 @@ const Data = (props : DataProps) => {
 
   useEffect(() => {
     getNowTime();
+    const Container : any = document.getElementById('dataContainer');
+    Container.style.backgroundColor = props.alami.conditionBgColor;
     console.log('rerender');
   },[nowTime.nowMin]);
 
@@ -68,8 +74,30 @@ const Data = (props : DataProps) => {
 
   return (
     <>
+      <Tips />
+      <AlertModal idNum={0} contents={[
+        "⚠️ 필독 - 지도 ⚠️",
+        "해외입국자를 제외한 수치 및 표기입니다",
+        "확진자들의 위치가 안보일 경우 좌측 하단의 현위치 버튼을 눌러주세요",
+        "좌측 상단의 원들은 확진 판정 받은 환자가",
+        "며칠 전에 어디서 판정 받았는지를 나타냅니다",
+        "우측 하단 버튼으로 알리미를 볼 수 있습니다",
+        "🔎 검색기능",
+        "검색기능은 정확한 주소를 입력해야 합니다",
+        "아직 미완성이므로 해당지역의 주변 확진자 수는 파악하지 못합니다"
+      ]}/>
+      <AlertModal idNum={1} contents={[
+        "⚠️ 필독 - 알리미 ⚠️",
+        "위치파악이 좀 힘드네요 😭",
+        "좌측 하단의 현위치 버튼을 천천히 여러번 (권장 : 3번 이상) 눌러주세요",
+        "누를수록 위치를 잘 찾습니다",
+        "위치상 약간의 오차가 있을 수 있습니다",
+        "우측 하단 버튼으로 지도를 볼 수 있습니다",
+        "좌측 상단 버튼으로 코로나 관련 홈페이지들에 방문 할 수 있습니다"
+      ]}/>
       <div className="dataContainer show" id="dataContainer">
-        <OtherMenu bgColor={props.bgColor}/>
+        <OtherMenu />
+        
         <div className="alami-wrapper">
           <div className="header">
             {/* 현 주소와 시간 표시 */}

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-interface OtherMenuProps{
-    bgColor : string
-}
+// interface OtherMenuProps{
+//     bgColor : string
+// }
 
-const OtherMenu = (props : OtherMenuProps) => {
+const OtherMenu = () => {
     const [clicked,setClicked] = useState('none');
     const [aboutClicked,setAboutClicked] = useState('none');
 

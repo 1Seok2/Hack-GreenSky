@@ -267,7 +267,6 @@ const Map = () => {
 
     let geocoder : any= new window.kakao.maps.services.Geocoder();
     console.log('make pat');
-    makeArrayPatient();
 
     geocoder.addressSearch(search, function(result : any, status : any) {
 
@@ -374,8 +373,6 @@ const Map = () => {
       if (latitude !== 37.4882) saveCoords(coordObj);
 
       makeMarkerMyPos();
-
-      makeArrayPatient();
     };
     init();
     return(() =>{
@@ -392,7 +389,6 @@ const Map = () => {
               lng={longitude}
               patientNum={countInCircle}
               alami={stateAlami}
-              bgColor={stateAlami.conditionBgColor}
         />
         <ul className="mapNav">
           <li>확진자 발생 추이</li>
@@ -406,15 +402,6 @@ const Map = () => {
         <a href="#" className="btn" id="btn-search" onClick={btn_search}><i className="icon-search"></i></a>
         <a href="#" className="btn" id="btn-reload" onClick={btn_reload}><i className="icon-location"></i></a>
       </div>
-      <AlertModal idNum={0} contents={[
-                            "위치 조정 후 우측 하단의 알리미 버튼으로 위험도 볼 수 있습니다",
-                            "좌측 상단의 원들은 확진 판정 받은 환자가",
-                            "며칠 전에 어디서 판정 받았는지를 나타냅니다"]}/>
-      <AlertModal idNum={1} contents={[
-                            "위치를 잡느라 좀 애먹고 있어요 😭",
-                            "좌측 하단의 현위치 버튼을 천천히 4~5번 이상 눌러주세요",
-                            "누를수록 위치를 빨리 찾습니다",
-                            "위치상 약간의 오차가 있을 수 있습니다"]}/>
       <div className="nav-bottom">
         <img id="mylogo" src={MyLogoImg} alt="logo"/>
       </div>
