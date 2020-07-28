@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import MakeSentence from './MakeSentence';
-import OtherMenu from './OtherMenu';
+import OtherMenu from '../navigation/OtherMenu';
 import AlertModal from '../modal/alertModal';
 import Tips from './Tips'
 import '../../style/Data.css';

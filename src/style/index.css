@@ -18,9 +18,10 @@ code {
 }
 
 #map {
-  position: relative;
+  position: fixed;
   width: 100vw;
   height: 97vh;
+  z-index: 49;
 }
 .mapNav {
   font-size: 1rem;
@@ -87,7 +88,7 @@ code {
   /* display: none; */
   position: absolute;
   right: 25%;
-  z-index: 10;
+  z-index: 50;
   width: 100px;
   height: 3rem;
   top: 2rem;
