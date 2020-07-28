@@ -50,12 +50,15 @@
     display: none;
 }
 .btn-search-close{
-    float: right;
+    position: fixed;
+    right: 1.2rem;
     padding-right: 0.6rem;
     padding-top: 0.6rem;
 }
 #placesList {
     padding-left: 0.6rem;
+    height: 80%;
+    overflow: scroll;
 }
 .info h5 {
     margin : 0;
