@@ -61,10 +61,8 @@ const Map = () => {
   let map: any;
 
   const makeArrayPatient = () => {
-    console.log('MAP 1');
     let PatientInfo : Object[] = [];
     if(Patient.mapData) {
-      console.log('MAP 2');
       Patient.data.map((value) => {
         let daysGap : number;
         // daysGap = isInFewDays(value.month, value.day);
@@ -73,7 +71,6 @@ const Map = () => {
           _date : value.day
         }
         daysGap = DateGapAcumulator(curDay);
-        // console.log('dategap : ',daysGap);
         if(daysGap <= 10){
           let sliced =  value.latlng.split(', ');
           let patient = {
@@ -83,21 +80,16 @@ const Map = () => {
             month : value.month,
             day : value.day
           }
-          console.log('is in ',patient.lat,patient.lng);
           PatientInfo = [...PatientInfo, patient];
           if(daysGap <= 1){
-            console.log('mark red');
             makeMarkerInfected(patient, colorRed);
           } else if (1 < daysGap && daysGap <= 4){
-            console.log('mark org');
             makeMarkerInfected(patient, colorOrg);
           } else if (4 < daysGap && daysGap <=9){
-            console.log('mark grn');
             makeMarkerInfected(patient, colorGrn);
           } else {
             console.log('MAP none in circle');
           }
-          console.log('MAP 3');
 
           let distance : number;
           const getDistance  = {
@@ -108,7 +100,6 @@ const Map = () => {
           }
           distance = PositionDistance(getDistance);
           if(distance < 3600){
-            console.log("paInfo : ",patient.lat,patient.lng,distance);
             AddCount();
           }
         }
@@ -167,7 +158,6 @@ const Map = () => {
       fillColor: `${color}`, // 채우기 색깔입니다
       fillOpacity: 0.7, // 채우기 불투명도 입니다
     });
-    console.log('got is ',circle,_patient,color);
     
     // 지도에 원을 표시합니다
     circle.setMap(map);
@@ -176,10 +166,8 @@ const Map = () => {
   const btn_reload = () => {
     const loadedCoords = localStorage.getItem('coords');
     if(loadedCoords === null) {
-      console.log('nonal');
       window.location.reload();
     } else {
-      console.log('already');
       const parsedCoords = JSON.parse(loadedCoords);
       setLatitude(parsedCoords.lat);
       setLongitude(parsedCoords.lng);
@@ -194,7 +182,6 @@ const Map = () => {
           ),
           level: 8,
         };
-        console.log('map render2');
         map = new window.kakao.maps.Map(container, options);
         let geocoder = new window.kakao.maps.services.Geocoder();
 
@@ -257,7 +244,6 @@ const Map = () => {
         ),
         level: 8,
       };
-      console.log('map render2');
       map = new window.kakao.maps.Map(container, options);
       let geocoder = new window.kakao.maps.services.Geocoder();
 
@@ -354,7 +340,6 @@ const Map = () => {
           ),
           level: 8,
         };
-        console.log('map render1');
         map = new window.kakao.maps.Map(container, options);
       });
 
