@@ -1,11 +1,11 @@
 // global kakao
 import React, { Component, useState, useEffect } from 'react';
-import AlertModal from '../modal/alertModal';
+import NavBottom from '../navigation/NavBottom';
+import PositionDistance from './PositionDistance';
 import { Link } from 'react-router-dom';
 import Patient from '../../InfectedData.json';
-import MyLogoImg from '../../assets/slimgslogo.jpg';
 import Data from '../alami/Data';
-// import useGeolocation from './useGeolocation';
+import DateGapAcumulator from './DayGapAcumulator';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -60,36 +60,6 @@ const Map = () => {
   };
   let map: any;
 
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth() + 1;
-  const date = today.getDate();
-  const Months = (year%100 === 0 || year%4 === 0) && year%400 !== 0 ? 
-            [31,28,31,30,31,30,31,31,30,31,30,31] :
-            [31,29,31,30,31,30,31,31,30,31,30,31];
-
-  const isInFewDays = (_month : number, _date : number) : number=> {
-    // 알고리즘 수정 요함
-    let gap : number = 11;
-    if(month === _month+1 ){
-      gap = date + (Months[_month-1]-_date);
-    } else if (month === _month){
-      gap = date-_date;
-    }
-    return gap;
-  }
-
-  const positionDistance = (lat : number, lng : number, _lat : number, _lng : number) : number => {
-    let dis = 0;
-    let disLat : number = Math.abs(lat-_lat);
-    let disLng = Math.abs(lng-_lng);
-    dis = Math.sqrt(Math.pow((disLat%100 * 88804 + Math.floor((disLat-disLat%100)*100)*1480
-          + (disLat*100-Math.floor(disLat*100))*24.668),2)
-          + Math.pow((disLng%100 * 88804 + Math.floor((disLng-disLng%100)*100)*1480
-          + (disLng*100-Math.floor(disLng*100))*24.668),2));
-    return dis;
-  }
-
   const makeArrayPatient = () => {
     console.log('MAP 1');
     let PatientInfo : Object[] = [];
@@ -97,7 +67,13 @@ const Map = () => {
       console.log('MAP 2');
       Patient.data.map((value) => {
         let daysGap : number;
-        daysGap = isInFewDays(value.month, value.day);
+        // daysGap = isInFewDays(value.month, value.day);
+        const curDay = {
+          _month : value.month,
+          _date : value.day
+        }
+        daysGap = DateGapAcumulator(curDay);
+        // console.log('dategap : ',daysGap);
         if(daysGap <= 10){
           let sliced =  value.latlng.split(', ');
           let patient = {
@@ -124,7 +100,13 @@ const Map = () => {
           console.log('MAP 3');
 
           let distance : number;
-          distance = positionDistance(latitude,longitude,patient.lat,patient.lng);
+          const getDistance  = {
+            lat : latitude,
+            lng : longitude,
+            _lat : patient.lat,
+            _lng : patient.lng
+          }
+          distance = PositionDistance(getDistance);
           if(distance < 3600){
             console.log("paInfo : ",patient.lat,patient.lng,distance);
             AddCount();
@@ -291,13 +273,6 @@ const Map = () => {
             position: coords
           });
 
-          // // 인포윈도우로 장소에 대한 설명을 표시합니다
-          // var infowindow = new window.kakao.maps.InfoWindow({
-          //   content: search
-          // });
-          // infowindow.open(map, marker);
-
-          // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
           map.setCenter(coords);
           makeMarkerMyPos(result[0].y, result[0].x);
         } 
@@ -403,8 +378,7 @@ const Map = () => {
 
   return (
     <>
-      <div id="map">
-      </div>
+      <div id="map"></div>
       <div className="options">
         <Data lat={latitude} 
               lng={longitude}
@@ -429,9 +403,7 @@ const Map = () => {
         <a href="#" className="btn" id="btn-search" onClick={btn_search}><i className="icon-search"></i></a>
         <a href="#" className="btn" id="btn-reload" onClick={btn_reload}><i className="icon-location"></i></a>
       </div>
-      <div className="nav-bottom">
-        <img id="mylogo" src={MyLogoImg} alt="logo"/>
-      </div>
+      <NavBottom />
       {/* <InfectedMarker /> */}
     </>
   );
