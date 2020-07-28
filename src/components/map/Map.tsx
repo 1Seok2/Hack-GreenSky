@@ -492,7 +492,6 @@ const Map = () => {
     form.classList.remove('show');
     form.classList.add('none');
     setFormState('none');
-    setSearch('');
   }
   
   const DeleteMapElements = () => {
@@ -610,7 +609,7 @@ const Map = () => {
               alami={stateAlami}
         />
         <ul className="mapNav">
-          <li className="mapNav-list-title">확진자 발생 추이</li>
+          {/* <li className="mapNav-list-title">확진자 발생 추이</li> */}
           <li className="navGrn">
             <i className="icon-circle icon-circle-green"></i> 5~9 일 사이
           </li>

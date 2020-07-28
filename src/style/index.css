@@ -138,6 +138,9 @@ code {
   #map {
     height: 100vh;
   }
+  .mapNav{
+    bottom: 3.6rem;
+  }
 }
 .nav-bottom {
   position: fixed;
