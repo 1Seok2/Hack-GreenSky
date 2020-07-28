@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/Hack-GreenSky/static/css/main.85c49010.chunk.css",
+    "main.js": "/Hack-GreenSky/static/js/main.28fbd6f6.chunk.js",
+    "main.js.map": "/Hack-GreenSky/static/js/main.28fbd6f6.chunk.js.map",
+    "runtime-main.js": "/Hack-GreenSky/static/js/runtime-main.7733c86a.js",
+    "runtime-main.js.map": "/Hack-GreenSky/static/js/runtime-main.7733c86a.js.map",
+    "static/js/2.49a8e130.chunk.js": "/Hack-GreenSky/static/js/2.49a8e130.chunk.js",
+    "static/js/2.49a8e130.chunk.js.map": "/Hack-GreenSky/static/js/2.49a8e130.chunk.js.map",
+    "index.html": "/Hack-GreenSky/index.html",
+    "precache-manifest.b17e6dc3e862c52e9bb71b14dddcd81c.js": "/Hack-GreenSky/precache-manifest.b17e6dc3e862c52e9bb71b14dddcd81c.js",
+    "service-worker.js": "/Hack-GreenSky/service-worker.js",
+    "static/css/main.85c49010.chunk.css.map": "/Hack-GreenSky/static/css/main.85c49010.chunk.css.map",
+    "static/js/2.49a8e130.chunk.js.LICENSE.txt": "/Hack-GreenSky/static/js/2.49a8e130.chunk.js.LICENSE.txt",
+    "static/media/mapticon-embedded.css": "/Hack-GreenSky/static/media/mapticon.ec5e73b4.eot",
+    "static/media/slimgslogo.jpg": "/Hack-GreenSky/static/media/slimgslogo.6d11455c.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7733c86a.js",
+    "static/js/2.49a8e130.chunk.js",
+    "static/css/main.85c49010.chunk.css",
+    "static/js/main.28fbd6f6.chunk.js"
+  ]
+}
