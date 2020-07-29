@@ -1,4 +1,5 @@
-deployed => [Corona Find](https://1seok2.github.io/Hack-GreenSky/#/) or [This](https://1seok2.github.io/covidjisu).
+# Be sure to turn on location check service
+deployed => [Corona Find](https://1seok2.github.io/Hack-GreenSky/#/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -16,7 +17,7 @@ Runs the app in the development mode.<br />
 ### `npm start`
 
 
-# This shows you... (safari maybe not working)
+# This shows you...
 
 * start page (didnt catch your coords and show notices)
 <img width="1280" alt="스크린샷 2020-07-30 오전 2 00 27" src="https://user-images.githubusercontent.com/49581472/88830343-ca127500-d208-11ea-9c1a-b712ec4ad8c0.png">
