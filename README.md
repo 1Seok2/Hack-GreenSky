@@ -1,4 +1,4 @@
-deployed => [Corona Find](https://1seok2.github.io/covidjisu).
+deployed => [Corona Find](https://1seok2.github.io/covidjisu) or [This](https://1seok2.github.io/Hack-GreenSky/#/).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
