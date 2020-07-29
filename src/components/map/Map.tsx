@@ -1,13 +1,19 @@
 // global kakao
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBottom from '../navigation/NavBottom';
-import PositionDistance from './PositionDistance';
-import { Link } from 'react-router-dom';
+import PositionDistance from './marker/patient/PositionDistance';
 import Patient from '../../InfectedData.json';
 import Data from '../alami/Data';
 import '../../style/search_kakao.css';
 import '../../style/fontello-6de7bc38/css/mapticon-embedded.css';
-import DateGapAcumulator from './DayGapAcumulator';
+import DateGapAcumulator from './marker/patient/DayGapAcumulator';
+import SearchPlaces from './api/SearchPlaces';
+import MakeMarkerInfected from './marker/MakeMarkerInfected';
+import MakeMarkerMyPosition from './marker/MakeMarkerMyPosition';
+import MapNav from './compose/MapNav';
+import AddMarker from './marker/AddMarker';
+import SearchLists from './compose/SearchLists';
+
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -16,6 +22,11 @@ declare global {
     kakao: any;
   }
 }
+
+
+const colorRed = '#eb4d4b';
+const colorOrg = '#f39c12';
+const colorGrn = '#27ae60';
 
 //hooks
 const Map = () => {
@@ -32,7 +43,7 @@ const Map = () => {
     conditionFace : '',
     conditionState : '',
     conditionTxt : '위치 조정 해주세요',
-    conditionBgColor : '#1289A7'
+    conditionBgColor : '#009432'
   });
   const [countInCircle,setCountInCircle] = useState(0);
   const [latitude, setLatitude] = useState(37.4882);
@@ -84,11 +95,11 @@ const Map = () => {
           }
           PatientInfo = [...PatientInfo, patient];
           if(daysGap <= 1){
-            makeMarkerInfected(patient, colorRed);
+            MakeMarkerInfected(map,patient, colorRed);
           } else if (1 < daysGap && daysGap <= 4){
-            makeMarkerInfected(patient, colorOrg);
+            MakeMarkerInfected(map,patient, colorOrg);
           } else if (4 < daysGap && daysGap <=9){
-            makeMarkerInfected(patient, colorGrn);
+            MakeMarkerInfected(map,patient, colorGrn);
           } else {
             console.log('MAP none in circle');
           }
@@ -113,62 +124,47 @@ const Map = () => {
     setCountInCircle((prevCount) => prevCount+1);
   }
 
-  const makeMarkerMyPos = (_lat : any,_lng : any) => {
-    var markerPosition = new window.kakao.maps.LatLng(
-      _lat,
-      _lng
-    );
-
-    // 마커를 생성합니다
-    var marker = new window.kakao.maps.Marker({
-      position: markerPosition,
-    });
-
-    // 마커가 지도 위에 표시되도록 설정합니다
-    marker.setMap(map);
-    // 지도에 표시할 원을 생성합니다
-    var circle = new window.kakao.maps.Circle({
-      center: new window.kakao.maps.LatLng(
-        _lat,
-        _lng
-      ), // 원의 중심좌표 입니다
-      radius: 2400, // 미터 단위의 원의 반지름입니다 , 대생활반경 4600 , 중생활반경 2400
-      strokeWeight: 1, // 선의 두께입니다
-      strokeColor: '#75B8FA', // 선의 색깔입니다
-      strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-      strokeStyle: 'solid', // 선의 스타일 입니다
-      fillColor: '#CFE7FF', // 채우기 색깔입니다
-      fillOpacity: 0.6, // 채우기 불투명도 입니다
-    });
-
-    // 지도에 원을 표시합니다
-    circle.setMap(map);
-  };
-
-  const colorRed = '#eb4d4b';
-  const colorOrg = '#f39c12';
-  const colorGrn = '#27ae60';
-  //patient circles
-  const makeMarkerInfected = (_patient : any, color:string) => {
-    const circle = new window.kakao.maps.Circle({
-      center: new window.kakao.maps.LatLng(_patient.lat, _patient.lng), // 원의 중심좌표 입니다
-      radius: 1200, // 미터 단위의 원의 반지름입니다
-      strokeWeight: 1, // 선의 두께입니다
-      strokeColor: `${color}`, // 선의 색깔입니다
-      strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-      strokeStyle: 'solid', // 선의 스타일 입니다
-      fillColor: `${color}`, // 채우기 색깔입니다
-      fillOpacity: 0.7, // 채우기 불투명도 입니다
-    });
-    
-    // 지도에 원을 표시합니다
-    circle.setMap(map);
-  };
-
   const btn_reload = () => {
+    setCountInCircle(0);
     const loadedCoords = localStorage.getItem('coords');
     if(loadedCoords === null) {
-      window.location.reload();
+      navigator.geolocation.getCurrentPosition(onEvent, onError);
+      window.kakao.maps.load(() => {
+        DeleteMapElements();
+        let container = document.getElementById('map');
+        let options = {
+          center: new window.kakao.maps.LatLng(
+            latitude,
+            longitude
+          ),
+          level: 8,
+        };
+        map = new window.kakao.maps.Map(container, options);
+        let geocoder = new window.kakao.maps.services.Geocoder();
+
+        const searchAddrFromCoords = (coords : any, callback : any) : void=> {
+          // 좌표로 행정동 주소 정보를 요청합니다
+          geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+        }
+        const displayCenterInfo = (result : any, status : any) => {
+          if (status === window.kakao.maps.services.Status.OK) {
+            var infoDiv : any = document.getElementById('centerAddr');
+            for(var i = 0; i < result.length; i++) {
+              // 행정동의 region_type 값은 'H' 이므로
+              if (result[i].region_type === 'H') {
+                infoDiv.innerHTML = result[i].address_name;
+                break;
+              }
+            }
+          }    
+        }
+        // 현재 지도 중심좌표로 주소를 검색해서 상단에 표시합니다
+        searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+
+      
+      });
+      MakeMarkerMyPosition(map, latitude, longitude);
+      makeArrayPatient();
     } else {
       const parsedCoords = JSON.parse(loadedCoords);
       setLatitude(parsedCoords.lat);
@@ -208,7 +204,7 @@ const Map = () => {
 
       
       });
-      makeMarkerMyPos(latitude, longitude);
+      MakeMarkerMyPosition(map, latitude, longitude);
 
       makeArrayPatient();
     }
@@ -254,24 +250,6 @@ const Map = () => {
         level: 8,
       };
       map = new window.kakao.maps.Map(container, options);
-      // let geocoder = new window.kakao.maps.services.Geocoder();
-
-      // geocoder.addressSearch(search, function(result : any, status : any) {
-
-      //   // 정상적으로 검색이 완료됐으면 
-      //   if (status === window.kakao.maps.services.Status.OK) {
-      //     var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-
-      //     // 결과값으로 받은 위치를 마커로 표시합니다
-      //     var marker = new window.kakao.maps.Marker({
-      //       map: map,
-      //       position: coords
-      //     });
-
-      //     map.setCenter(coords);
-      //     makeMarkerMyPos(result[0].y, result[0].x);
-      //   } 
-      // });
 
       // 마커를 담을 배열입니다
       var markers : any= [];
@@ -336,52 +314,7 @@ const Map = () => {
         }   
         markers = [];
       }
-
-      // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-      const addMarker = (position : any, idx : any, title? : any) => {
-        var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
-            imageSize = new window.kakao.maps.Size(36, 37),  // 마커 이미지의 크기
-            imgOptions =  {
-                spriteSize : new window.kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
-                spriteOrigin : new window.kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-                offset: new window.kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-            },
-            markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
-                marker = new window.kakao.maps.Marker({
-                position: position, // 마커의 위치
-                image: markerImage 
-            });
-
-        marker.setMap(map); // 지도 위에 마커를 표출합니다
-        markers.push(marker);  // 배열에 생성된 마커를 추가합니다
-
-        return marker;
-      }
-
-      // 검색결과 항목을 Element로 반환하는 함수입니다
-      const getListItem = (index : any, places : any) => {
-
-        var el : any = document.createElement('li'),
-        itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
-                    '<div class="info">' +
-                    '   <h5>' + places.place_name + '</h5>';
-
-        if (places.road_address_name) {
-            itemStr += '    <span>' + places.road_address_name + '</span>' +
-                        '   <span class="jibun gray">' +  places.address_name  + '</span>';
-        } else {
-            itemStr += '    <span class="make-address">' +  places.address_name  + '</span>'; 
-        }
-                    
-          itemStr += '  <span class="tel">'+ `<a href="tel:${places.phone}">${places.phone}</a>` + '</span>' +
-                    '</div>';           
-
-        el.innerHTML = itemStr;
-        el.className = 'item';
-
-        return el;
-      }
-
+      
       // 검색 결과 목록과 마커를 표출하는 함수입니다
       const displayPlaces = (places : any) => {
 
@@ -401,8 +334,8 @@ const Map = () => {
 
             // 마커를 생성하고 지도에 표시합니다
             var placePosition = new window.kakao.maps.LatLng(places[i].y, places[i].x),
-                marker : any = addMarker(placePosition, i), 
-                itemEl : any = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+                marker : any = AddMarker(map, markers, placePosition, i), 
+                itemEl : any = SearchPlaces(i, places[i]); // 검색 결과 항목 Element를 생성합니다
 
             // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
             // LatLngBounds 객체에 좌표를 추가합니다
@@ -539,7 +472,6 @@ const Map = () => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(onEvent, onError);
     
-    //this.watchId = navigator.geolocation.watchPosition(this.onEvent, this.onError);
     const script = document.createElement('script');
     script.async = true;
     script.src =
@@ -553,7 +485,6 @@ const Map = () => {
         let container : any= document.getElementById('map');
 
         let options = {
-          // center: new window.kakao.maps.LatLng(37.506502, 127.053617),
           center: new window.kakao.maps.LatLng(
             latitude,
             longitude
@@ -563,63 +494,25 @@ const Map = () => {
         map = new window.kakao.maps.Map(container, options);
       });
 
-      const saveCoords = (obj: any) => {
-        localStorage.setItem('coords', JSON.stringify(obj));
-      };
-
-      const coordObj = {
-        lat: latitude,
-        lng: longitude,
-      };
-      if (latitude !== 37.4882) saveCoords(coordObj);
-
-      makeMarkerMyPos(latitude,longitude);
+      MakeMarkerMyPosition(map, latitude,longitude);
     };
     init();
     return(() =>{
       DeleteMapElements()
     });
-  }, [latitude, longitude]);
-
-  const btn_close = () => {
-    const menu_wrap = document.querySelector('#menu_wrap');
-    menu_wrap?.classList.toggle('none');
-    menu_wrap?.classList.toggle('show');
-  }
+  }, []);
 
   return (
     <>
       <div id="map"></div>
-      <div id="menu_wrap" className="bg_white none">
-        <div className="option">
-          <div onClick={btn_close} className="btn-search-close"><i className="icon-cancel"></i>
-            <form onSubmit={btn_search} className="kakao-search-form">
-                키워드 : <input type="text" value={search} id="keyword" size={15} /> 
-                <button type="submit">검색하기</button> 
-            </form>
-          </div>
-        </div>
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
-      </div>
+      <SearchLists searchValue={search}/>
       <div className="options">
         <Data lat={latitude} 
               lng={longitude}
               patientNum={countInCircle}
               alami={stateAlami}
         />
-        <ul className="mapNav">
-          {/* <li className="mapNav-list-title">확진자 발생 추이</li> */}
-          <li className="navGrn">
-            <i className="icon-circle icon-circle-green"></i> 5~9 일 사이
-          </li>
-          <li className="navOrg">
-            <i className="icon-circle icon-circle-orange"></i> 2~4 일 사이
-          </li>
-          <li className="navRed">
-            <i className="icon-circle icon-circle-red"></i> 1일 이내
-          </li>
-        </ul>
+        <MapNav />
         <form className="form-search none" onSubmit={onSubmitForm}>
           <input type="text" value={search} onChange={onChangeSearch}/>
         </form>

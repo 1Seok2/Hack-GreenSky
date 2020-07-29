@@ -65,8 +65,8 @@ const Data = (props : DataProps) => {
 
   useEffect(() => {
     getNowTime();
-    // const Container : any = document.getElementById('dataContainer');
-    // Container.style.backgroundColor = props.alami.conditionBgColor;
+    const Container : any = document.getElementById('dataContainer');
+    Container.style.backgroundColor = props.alami.conditionBgColor;
     console.log('rerender');
   },[nowTime.nowMin]);
 
@@ -93,7 +93,7 @@ const Data = (props : DataProps) => {
         "우측 하단 버튼으로 지도를 볼 수 있습니다",
         "우측 상단 버튼으로 코로나 관련 홈페이지들에 방문 할 수 있습니다"
       ]}/>
-      <div className="dataContainer show" id="dataContainer">
+      <div className="dataContainer show" id="dataContainer" style={{backgroundColor:`${props.alami.conditionBgColor}`}}>
         <div className="other-menu-wrapper">
           <OtherMenu />
         </div>
