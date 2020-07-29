@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 # How to use
 
 if you wanna use this
-### `git clone <this repository>`
+### `git clone https://github.com/1Seok2/Hack-GreenSky.git`
 
 and then, change directory to cloned repository,
 
