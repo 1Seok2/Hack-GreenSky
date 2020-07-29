@@ -1,4 +1,4 @@
-deployed => [Corona Find](https://1seok2.github.io/covidjisu) or [This](https://1seok2.github.io/Hack-GreenSky/#/).
+deployed => [Corona Find](https://1seok2.github.io/Hack-GreenSky/#/) or [This](https://1seok2.github.io/covidjisu).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -18,18 +18,30 @@ Runs the app in the development mode.<br />
 
 # This shows you... (safari maybe not working)
 
-## start page (didnt catch your coords)
-<img width="1280" alt="main" src="https://user-images.githubusercontent.com/49581472/88484283-6984fd00-cfa8-11ea-904a-e56827736f74.png">
+* start page (didnt catch your coords and show notices)
+<img width="1280" alt="스크린샷 2020-07-30 오전 2 00 27" src="https://user-images.githubusercontent.com/49581472/88830343-ca127500-d208-11ea-9c1a-b712ec4ad8c0.png">
 
-## if it catch your coords..
-<img width="1280" alt="clicked" src="https://user-images.githubusercontent.com/49581472/88484286-6e49b100-cfa8-11ea-8f5d-316276e525a2.png">
+* if it catch your coords..
+<img width="1280" alt="스크린샷 2020-07-30 오전 2 00 39" src="https://user-images.githubusercontent.com/49581472/88830355-cc74cf00-d208-11ea-9c68-0db48d2f3bee.png">
 
-## gotomap
-<img width="1280" alt="map" src="https://user-images.githubusercontent.com/49581472/88484284-6be75700-cfa8-11ea-9185-19d69c8efa27.png">
+* you can go to the other menus about COVID19 sites
+<img width="1280" alt="스크린샷 2020-07-30 오전 2 00 51" src="https://user-images.githubusercontent.com/49581472/88830366-d0a0ec80-d208-11ea-8d42-078ee77b2d69.png">
+
+* in the map
+<img width="1280" alt="스크린샷 2020-07-30 오전 2 01 02" src="https://user-images.githubusercontent.com/49581472/88830614-2b3a4880-d209-11ea-83dc-c259b05dadfb.png">
+
+* you can see other cities too
+<img width="1280" alt="스크린샷 2020-07-30 오전 2 01 12" src="https://user-images.githubusercontent.com/49581472/88830632-31302980-d209-11ea-9a7e-14aa1d6b96f8.png">
+
+* it supports you for searching other regions
+<img width="1280" alt="스크린샷 2020-07-30 오전 2 01 23" src="https://user-images.githubusercontent.com/49581472/88830804-6dfc2080-d209-11ea-9630-4192ebf166fd.png">
+<img width="1280" alt="스크린샷 2020-07-30 오전 2 02 07" src="https://user-images.githubusercontent.com/49581472/88830819-75232e80-d209-11ea-85f4-39336d8fab54.png">
+<img width="1280" alt="스크린샷 2020-07-30 오전 2 02 17" src="https://user-images.githubusercontent.com/49581472/88830841-81a78700-d209-11ea-8d76-124a238898cf.png">
+
 
 # in mobile version
 
-## if it catch your coords..
+* if it catch your coords..
 <img src="https://user-images.githubusercontent.com/49581472/88484393-2f682b00-cfa9-11ea-8a23-2a8f593f2c94.jpeg" width=300px />
-## gotomap_mobile
+* gotomap_mobile
 <img src="https://user-images.githubusercontent.com/49581472/88484437-663e4100-cfa9-11ea-9472-94bd6d040dd4.jpeg" width=300px />
