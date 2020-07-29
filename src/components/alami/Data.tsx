@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import MakeSentence from './MakeSentence';
 import OtherMenu from '../navigation/OtherMenu';
-import AlertModal from '../modal/alertModal';
+import AlertModal from './modal/alertModal';
 import Tips from './Tips'
 import '../../style/Data.css';
 import '../../style/fontello-6de7bc38/css/mapticon-embedded.css';
@@ -80,10 +80,7 @@ const Data = (props : DataProps) => {
         "확진자들의 위치가 안보일 경우 좌측 하단의 현위치 버튼을 여러번 눌러주세요",
         "해외입국자를 제외한 수치 및 표기입니다",
         "좌측 하단의 원들은 확진 판정 받은 환자가 며칠 전에 어디서 판정 받았는지를 나타냅니다",
-        "우측 하단 버튼으로 알리미를 볼 수 있습니다",
-        "🔎 검색기능",
-        "검색기능은 정확한 주소를 입력해야 합니다",
-        "ex - 서울시, 강릉시청, 용산구, 부산 해운대, 영통동, 덕영대로"
+        "우측 하단 버튼으로 알리미를 볼 수 있습니다"
       ]}/>
       <AlertModal idNum={1} contents={[
         "⚠️ 필독 - 알리미 ⚠️",

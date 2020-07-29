@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ModalContent from './ModalConents';
-import '../../style/alertModal.css';
+import '../../../style/alertModal.css';
 
 interface ModalProps {
     idNum : number,
