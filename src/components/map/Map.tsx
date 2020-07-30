@@ -13,6 +13,8 @@ import MakeMarkerMyPosition from './marker/MakeMarkerMyPosition';
 import MapNav from './compose/MapNav';
 import AddMarker from './marker/AddMarker';
 import SearchLists from './compose/SearchLists';
+import ButtonReloadSetPosition from './button/ButtonReloadSetPosition';
+import SubmitSearchList from './api/SubmitSearchList';
 
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -22,7 +24,6 @@ declare global {
     kakao: any;
   }
 }
-
 
 const colorRed = '#eb4d4b';
 const colorOrg = '#f39c12';
@@ -131,37 +132,7 @@ const Map = () => {
       navigator.geolocation.getCurrentPosition(onEvent, onError);
       window.kakao.maps.load(() => {
         DeleteMapElements();
-        let container = document.getElementById('map');
-        let options = {
-          center: new window.kakao.maps.LatLng(
-            latitude,
-            longitude
-          ),
-          level: 8,
-        };
-        map = new window.kakao.maps.Map(container, options);
-        let geocoder = new window.kakao.maps.services.Geocoder();
-
-        const searchAddrFromCoords = (coords : any, callback : any) : void=> {
-          // 좌표로 행정동 주소 정보를 요청합니다
-          geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
-        }
-        const displayCenterInfo = (result : any, status : any) => {
-          if (status === window.kakao.maps.services.Status.OK) {
-            var infoDiv : any = document.getElementById('centerAddr');
-            for(var i = 0; i < result.length; i++) {
-              // 행정동의 region_type 값은 'H' 이므로
-              if (result[i].region_type === 'H') {
-                infoDiv.innerHTML = result[i].address_name;
-                break;
-              }
-            }
-          }    
-        }
-        // 현재 지도 중심좌표로 주소를 검색해서 상단에 표시합니다
-        searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-
-      
+        map = ButtonReloadSetPosition(latitude,longitude);
       });
       MakeMarkerMyPosition(map, latitude, longitude);
       makeArrayPatient();
@@ -172,37 +143,7 @@ const Map = () => {
       setCountInCircle(0);
       window.kakao.maps.load(() => {
         DeleteMapElements();
-        let container = document.getElementById('map');
-        let options = {
-          center: new window.kakao.maps.LatLng(
-            latitude,
-            longitude
-          ),
-          level: 8,
-        };
-        map = new window.kakao.maps.Map(container, options);
-        let geocoder = new window.kakao.maps.services.Geocoder();
-
-        const searchAddrFromCoords = (coords : any, callback : any) : void=> {
-          // 좌표로 행정동 주소 정보를 요청합니다
-          geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
-        }
-        const displayCenterInfo = (result : any, status : any) => {
-          if (status === window.kakao.maps.services.Status.OK) {
-            var infoDiv : any = document.getElementById('centerAddr');
-            for(var i = 0; i < result.length; i++) {
-              // 행정동의 region_type 값은 'H' 이므로
-              if (result[i].region_type === 'H') {
-                infoDiv.innerHTML = result[i].address_name;
-                break;
-              }
-            }
-          }    
-        }
-        // 현재 지도 중심좌표로 주소를 검색해서 상단에 표시합니다
-        searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-
-      
+        map = ButtonReloadSetPosition(latitude,longitude);
       });
       MakeMarkerMyPosition(map, latitude, longitude);
 
@@ -514,7 +455,8 @@ const Map = () => {
         />
         <MapNav />
         <form className="form-search none" onSubmit={onSubmitForm}>
-          <input type="text" value={search} onChange={onChangeSearch}/>
+          <input type="text" placeholder="주소를 입력해 주세요" value={search} onChange={onChangeSearch}/>
+          <span className="btn-form-close" onClick={() => setSearch('')}><i className="icon-cancel"></i></span>
         </form>
         <a href="#" className="btn" id="btn-search" onClick={btn_search}><i className="icon-search"></i></a>
         <a href="#" className="btn" id="btn-reload" onClick={btn_reload}><i className="icon-location"></i></a>
