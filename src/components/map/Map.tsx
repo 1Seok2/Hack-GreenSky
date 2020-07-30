@@ -14,7 +14,6 @@ import MapNav from './compose/MapNav';
 import AddMarker from './marker/AddMarker';
 import SearchLists from './compose/SearchLists';
 import ButtonReloadSetPosition from './button/ButtonReloadSetPosition';
-import SubmitSearchList from './api/SubmitSearchList';
 
 
 const API_KEY = process.env.REACT_APP_API_KEY;
