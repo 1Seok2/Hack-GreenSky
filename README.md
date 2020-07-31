@@ -29,10 +29,10 @@ Runs the app in the development mode.<br />
 <img width="1280" alt="스크린샷 2020-07-30 오전 2 00 51" src="https://user-images.githubusercontent.com/49581472/88830366-d0a0ec80-d208-11ea-8d42-078ee77b2d69.png">
 
 * in the map
-<img width="1280" alt="스크린샷 2020-07-30 오전 2 01 02" src="https://user-images.githubusercontent.com/49581472/88830614-2b3a4880-d209-11ea-83dc-c259b05dadfb.png">
+<img width="1280" alt="스크린샷 2020-07-31 오후 3 39 04" src="https://user-images.githubusercontent.com/49581472/89007638-10202380-d344-11ea-8f6a-b1da1dc1bfe6.png">
 
 * you can see other cities too
-<img width="1280" alt="스크린샷 2020-07-30 오전 2 01 12" src="https://user-images.githubusercontent.com/49581472/88830632-31302980-d209-11ea-9a7e-14aa1d6b96f8.png">
+<img width="1280" alt="스크린샷 2020-07-31 오후 3 39 18" src="https://user-images.githubusercontent.com/49581472/89007673-29c16b00-d344-11ea-9fad-9f7a48f0ec15.png">
 
 * it supports you for searching other regions
 <img width="1280" alt="스크린샷 2020-07-30 오전 2 01 23" src="https://user-images.githubusercontent.com/49581472/88830804-6dfc2080-d209-11ea-9630-4192ebf166fd.png">
