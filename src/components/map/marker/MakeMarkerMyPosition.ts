@@ -1,5 +1,12 @@
 const MakeMarkerMyPosition = (map:any,_lat : any,_lng : any) => {
-    var markerPosition = new window.kakao.maps.LatLng(
+  var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+  // 마커 이미지의 이미지 크기 입니다
+  var imageSize = new window.kakao.maps.Size(24, 35); 
+    
+  // 마커 이미지를 생성합니다    
+  var markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize); 
+  
+  var markerPosition = new window.kakao.maps.LatLng(
       _lat,
       _lng
     );
@@ -7,6 +14,7 @@ const MakeMarkerMyPosition = (map:any,_lat : any,_lng : any) => {
     // 마커를 생성합니다
     var marker = new window.kakao.maps.Marker({
       position: markerPosition,
+      image : markerImage
     });
 
     // 마커가 지도 위에 표시되도록 설정합니다

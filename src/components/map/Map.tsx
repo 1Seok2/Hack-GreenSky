@@ -75,6 +75,14 @@ const Map = () => {
 
   const makeArrayPatient = () => {
     let PatientInfo : Object[] = [];
+    var clusterer = new window.kakao.maps.MarkerClusterer({
+      map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+      averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+      minLevel: 10 // 클러스터 할 최소 지도 레벨 
+    });
+
+    var markers : any= [];
+
     if(Patient.mapData) {
       Patient.data.map((value) => {
         let daysGap : number;
@@ -94,14 +102,15 @@ const Map = () => {
             day : value.day
           }
           PatientInfo = [...PatientInfo, patient];
+
+          
+
           if(daysGap <= 1){
-            MakeMarkerInfected(map,patient, colorRed);
+            markers = [...markers,MakeMarkerInfected(map,patient, colorRed)];
           } else if (1 < daysGap && daysGap <= 4){
-            MakeMarkerInfected(map,patient, colorOrg);
+            markers = [...markers,MakeMarkerInfected(map,patient, colorOrg)];
           } else if (4 < daysGap && daysGap <=9){
-            MakeMarkerInfected(map,patient, colorGrn);
-          } else {
-            console.log('MAP none in circle');
+            markers = [...markers,MakeMarkerInfected(map,patient, colorGrn)];
           }
 
           let distance : number;
@@ -118,6 +127,7 @@ const Map = () => {
         }
       });
     }
+    clusterer.addMarkers(markers);
   }
 
   const AddCount = () => {
