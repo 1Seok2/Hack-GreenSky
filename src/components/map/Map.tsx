@@ -78,7 +78,7 @@ const Map = () => {
     var clusterer = new window.kakao.maps.MarkerClusterer({
       map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
       averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-      minLevel: 10 // 클러스터 할 최소 지도 레벨 
+      minLevel: 7 // 클러스터 할 최소 지도 레벨 
     });
 
     var markers : any= [];
@@ -105,11 +105,11 @@ const Map = () => {
 
           
 
-          if(daysGap <= 1){
+          if(daysGap <= 3){
             markers = [...markers,MakeMarkerInfected(map,patient, colorRed)];
-          } else if (1 < daysGap && daysGap <= 4){
+          } else if (3 < daysGap && daysGap <= 7){
             markers = [...markers,MakeMarkerInfected(map,patient, colorOrg)];
-          } else if (4 < daysGap && daysGap <=9){
+          } else if (7 < daysGap && daysGap <= 14){
             markers = [...markers,MakeMarkerInfected(map,patient, colorGrn)];
           }
 

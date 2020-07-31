@@ -26910,6 +26910,32 @@
          "address_name": "경기 의정부시 호원동 50-2",
          "address_english": "Hoeryong Green Pharmacy",
          "latlng": "37.72404040433009, 127.046614940978"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#충남 확진자",
+         "month": 7,
+         "day": 30,
+         "name": "충남",
+         "full": "충남 확진자",
+         "address": "코로나19 아산시보건소 선별진료소",
+         "address_name": "충남 아산시 모종동 573-2",
+         "address_english": "Corona 19 Asan Medical Center Screening Clinic",
+         "latlng": "36.782759896493715, 127.014412263075"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#서울 확진자",
+         "month": 7,
+         "day": 25,
+         "name": "서울",
+         "full": "서울 확진자",
+         "address": "우이천변 산책",
+         "address_name": "서울 도봉구 창동 703-14",
+         "address_english": "a walk along the Wuyicheon Stream",
+         "latlng": "37.639382448077356, 127.0341510537152"
       }
    ]
 }
