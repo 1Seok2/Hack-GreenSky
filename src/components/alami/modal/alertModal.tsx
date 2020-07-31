@@ -15,7 +15,7 @@ const AlertModal = (props : ModalProps) => {
     }
     return (
         <>
-            <div className="modal-wrapper show">
+            <div className="modal-wrapper show" id="id01">
                 <div className="modal">
                     <div className="modal-header">
                         공지사항 &amp; Tips
