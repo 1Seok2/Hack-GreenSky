@@ -26936,6 +26936,32 @@
          "address_name": "서울 도봉구 창동 703-14",
          "address_english": "a walk along the Wuyicheon Stream",
          "latlng": "37.639382448077356, 127.0341510537152"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#서울 확진자",
+         "month": 8,
+         "day": 2,
+         "name": "서울",
+         "full": "서울 확진자",
+         "address": "코로나19 삼육서울병원 선별진료소",
+         "address_name": "서울 동대문구 휘경동 29-1",
+         "address_english": "Corona 19 Samyuk Seoul Hospital Screening Clinic",
+         "latlng": "37.587990429594605, 127.065329444279"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#경기 확진자",
+         "month": 8,
+         "day": 2,
+         "name": "경기",
+         "full": "경기 확진자",
+         "address": "성남시의료원",
+         "address_name": "경기 성남시 수정구 태평동 3309",
+         "address_english": "Seongnam City Medical Center",
+         "latlng": "37.445053152463494, 127.138727193654"
       }
    ]
 }
