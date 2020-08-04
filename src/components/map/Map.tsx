@@ -93,6 +93,7 @@ const Map = () => {
         }
         daysGap = DateGapAcumulator(curDay);
         if(daysGap <= 10){
+          console.log(daysGap);
           let sliced =  value.latlng.split(', ');
           let patient = {
             position : value.address,
