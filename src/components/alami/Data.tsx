@@ -105,7 +105,10 @@ const Data = (props : DataProps) => {
           </div>
         </div>
       </div>
-      <a href="#" id="btn-back" onClick={onClickPos}><i className={btnValue}></i></a>
+      <a href="#" id="btn-back" onClick={onClickPos}>
+        <i className={btnValue}></i>
+        <div>지도/알리미</div>
+      </a>
     </>
   );
 

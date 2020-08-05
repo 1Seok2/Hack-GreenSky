@@ -54,29 +54,37 @@ code {
   z-index: 89;
   color: black;
   right: 1.8rem;
-  bottom: 1.2rem;
+  bottom: 2.4rem;
   text-decoration: none;
   font-weight: bold;
   text-align: center;
+}
+#btn-back div {
+  font-size: 1rem;
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.1rem;
 }
 .btn{
   text-align: center;
   line-height: 3.4rem;
-  width: 3.4rem;
-  height: 3.4rem;
   text-decoration: none;
   color: rgba(0, 0, 0, 0.6);
   position: fixed;
-  font-size: 2.3rem;
   z-index: 99;
   font-weight: bold;
   left: 1rem;
-  bottom: 1rem;
+  bottom: 2rem;
   color : white;
 }
+#btn-reload i{
+  font-size: 2.3rem;
+}
 #btn-search {
-  left: 6rem;
+  left: 7rem;
   z-index: 60;
+  bottom: 2.2rem;
+  font-size: 2.3rem;
 }
 .btn-form-close {
   position: absolute;
@@ -161,7 +169,7 @@ code {
 .nav-bottom {
   position: fixed;
   width: 100%;
-  height: 5rem;
+  height: 6rem;
   bottom: 0;
   background-color: white;
   z-index: 50;
@@ -172,4 +180,16 @@ code {
   z-index: 51;
   margin-top: 0.6rem;
   height: 3.8rem;
+}
+.btn-reload-desc{
+  position: fixed;
+  bottom: .5rem;
+  left: .7rem;
+  font-size: 1rem;
+}
+.btn-search-desc{
+  position: fixed;
+  bottom: .4rem;
+  left: 6.8rem;
+  font-size: 1rem;
 }

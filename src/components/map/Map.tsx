@@ -468,8 +468,14 @@ const Map = () => {
           <input type="text" placeholder="주소를 입력해 주세요" value={search} onChange={onChangeSearch}/>
           <span className="btn-form-close" onClick={() => setSearch('')}><i className="icon-cancel"></i></span>
         </form>
-        <a href="#" className="btn" id="btn-search" onClick={btn_search}><i className="icon-search"></i></a>
-        <a href="#" className="btn" id="btn-reload" onClick={btn_reload}><i className="icon-location"></i></a>
+        <a href="#" className="btn" id="btn-search" onClick={btn_search}>
+          <i className="icon-search"></i>
+          <div className="btn-search-desc">위치검색</div>
+        </a>
+        <a href="#" className="btn" id="btn-reload" onClick={btn_reload}>
+          <i className="icon-location"></i>
+          <div className="btn-reload-desc">위치재설정</div>
+        </a>
       </div>
       <NavBottom />
       {/* <InfectedMarker /> */}
