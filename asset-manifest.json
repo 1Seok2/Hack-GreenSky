@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/react-covidAlimi-Hackathon/static/css/main.39828c07.chunk.css",
-    "main.js": "/react-covidAlimi-Hackathon/static/js/main.4ab93397.chunk.js",
-    "main.js.map": "/react-covidAlimi-Hackathon/static/js/main.4ab93397.chunk.js.map",
-    "runtime-main.js": "/react-covidAlimi-Hackathon/static/js/runtime-main.4d6f503e.js",
-    "runtime-main.js.map": "/react-covidAlimi-Hackathon/static/js/runtime-main.4d6f503e.js.map",
-    "static/js/2.ba025ddb.chunk.js": "/react-covidAlimi-Hackathon/static/js/2.ba025ddb.chunk.js",
-    "static/js/2.ba025ddb.chunk.js.map": "/react-covidAlimi-Hackathon/static/js/2.ba025ddb.chunk.js.map",
-    "index.html": "/react-covidAlimi-Hackathon/index.html",
-    "precache-manifest.9f9d5c8e919b061017abeec1e98e0b23.js": "/react-covidAlimi-Hackathon/precache-manifest.9f9d5c8e919b061017abeec1e98e0b23.js",
-    "service-worker.js": "/react-covidAlimi-Hackathon/service-worker.js",
-    "static/css/main.39828c07.chunk.css.map": "/react-covidAlimi-Hackathon/static/css/main.39828c07.chunk.css.map",
-    "static/js/2.ba025ddb.chunk.js.LICENSE.txt": "/react-covidAlimi-Hackathon/static/js/2.ba025ddb.chunk.js.LICENSE.txt",
-    "static/media/mapticon-embedded.css": "/react-covidAlimi-Hackathon/static/media/mapticon.ec5e73b4.eot",
-    "static/media/slimgslogo.jpg": "/react-covidAlimi-Hackathon/static/media/slimgslogo.6d11455c.jpg"
+    "main.css": "/Hack-GreenSky/static/css/main.22e8f390.chunk.css",
+    "main.js": "/Hack-GreenSky/static/js/main.99025d84.chunk.js",
+    "main.js.map": "/Hack-GreenSky/static/js/main.99025d84.chunk.js.map",
+    "runtime-main.js": "/Hack-GreenSky/static/js/runtime-main.7733c86a.js",
+    "runtime-main.js.map": "/Hack-GreenSky/static/js/runtime-main.7733c86a.js.map",
+    "static/js/2.ba025ddb.chunk.js": "/Hack-GreenSky/static/js/2.ba025ddb.chunk.js",
+    "static/js/2.ba025ddb.chunk.js.map": "/Hack-GreenSky/static/js/2.ba025ddb.chunk.js.map",
+    "index.html": "/Hack-GreenSky/index.html",
+    "precache-manifest.abea51e514ecf58fcf1461a3ce564e00.js": "/Hack-GreenSky/precache-manifest.abea51e514ecf58fcf1461a3ce564e00.js",
+    "service-worker.js": "/Hack-GreenSky/service-worker.js",
+    "static/css/main.22e8f390.chunk.css.map": "/Hack-GreenSky/static/css/main.22e8f390.chunk.css.map",
+    "static/js/2.ba025ddb.chunk.js.LICENSE.txt": "/Hack-GreenSky/static/js/2.ba025ddb.chunk.js.LICENSE.txt",
+    "static/media/mapticon-embedded.css": "/Hack-GreenSky/static/media/mapticon.ec5e73b4.eot",
+    "static/media/slimgslogo.jpg": "/Hack-GreenSky/static/media/slimgslogo.6d11455c.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.4d6f503e.js",
+    "static/js/runtime-main.7733c86a.js",
     "static/js/2.ba025ddb.chunk.js",
-    "static/css/main.39828c07.chunk.css",
-    "static/js/main.4ab93397.chunk.js"
+    "static/css/main.22e8f390.chunk.css",
+    "static/js/main.99025d84.chunk.js"
   ]
 }
