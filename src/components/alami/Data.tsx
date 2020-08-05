@@ -14,8 +14,8 @@ interface DataProps {
 }
 
 const Data = (props : DataProps) => {
-  const [btnState, setBtnState] = useState('show');
-  const [btnValue, setBtnValue] = useState('icon-map-o');
+  const [btnState, setBtnState] = useState('none');
+  const [btnValue, setBtnValue] = useState('icon-emo-wink');
   const [nowTime, setNowTime] = useState({
     nowYear : '',
     nowMonth : '',
@@ -27,28 +27,16 @@ const Data = (props : DataProps) => {
   const onClickPos = () => {
     //init();
     const data : any= document.getElementById('dataContainer');
-    const back : any = document.getElementById('btn-back');
-    const searchBtn : any = document.getElementById('btn-search');
-    const reloadBtn : any = document.getElementById('btn-reload');
-    const tipsBtn : any = document.getElementsByClassName('btn-tips')[0];
     if(btnState === 'show'){
       data.classList.remove('show');
       data.classList.add('none');
       setBtnState('none');
       setBtnValue('icon-emo-wink');
-      back.style.color = "black";
-      searchBtn.style.color = "black";
-      reloadBtn.style.color = "black";
-      tipsBtn.style.color = "black";
     } else {
       data.classList.remove('none');
       data.classList.add('show');
       setBtnState('show');
       setBtnValue('icon-map-o');
-      back.style.color = "white";
-      searchBtn.style.color = "white";
-      reloadBtn.style.color = "white";
-      tipsBtn.style.color = "white";
     }
   };
 
@@ -77,13 +65,11 @@ const Data = (props : DataProps) => {
       <Tips />
       <AlertModal idNum={0} contents={[
         "⚠️ 필독 ⚠️",
-        "좌측 하단의 현위치 버튼을 누를수록 위치를 잘 찾습니다",
-        "우측 하단 버튼으로 지도/알리미를 볼 수 있습니다",
-        "우측 상단 버튼으로 코로나 관련 홈페이지들에 방문 할 수 있습니다",
+        "우측 하단의 현위치 버튼을 누를수록 위치를 잘 찾습니다",
         "확진자가 방문한 곳을 표시합니다",
-        "해외입국자를 제외한 수치 및 표기입니다"
+        "돋보기 버튼으로 다른지역을 검색하여 볼 수 있습니다"
       ]}/>
-      <div className="dataContainer show" id="dataContainer" style={{backgroundColor:`${props.alami.conditionBgColor}`}}>
+      <div className="dataContainer none" id="dataContainer" style={{backgroundColor:`${props.alami.conditionBgColor}`}}>
         <div className="other-menu-wrapper">
           <OtherMenu />
         </div>
@@ -107,7 +93,6 @@ const Data = (props : DataProps) => {
       </div>
       <a href="#" id="btn-back" onClick={onClickPos}>
         <i className={btnValue}></i>
-        <div>지도/알리미</div>
       </a>
     </>
   );
