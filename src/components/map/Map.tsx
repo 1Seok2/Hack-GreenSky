@@ -422,32 +422,8 @@ const Map = () => {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(onEvent, onError);
-    
-    const script = document.createElement('script');
-    script.async = true;
-    script.src =
-      `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${API_KEY}`;
-    document.head.appendChild(script);
-    
-    
-    script.onload = () => {
-      window.kakao.maps.load(() => {
-        DeleteMapElements();
-        let container : any= document.getElementById('map');
-
-        let options = {
-          center: new window.kakao.maps.LatLng(
-            latitude,
-            longitude
-          ),
-          level: 8,
-        };
-        map = new window.kakao.maps.Map(container, options);
-      });
-
-      MakeMarkerMyPosition(map, latitude,longitude);
-    };
     init();
+    btn_reload();
     return(() =>{
       DeleteMapElements()
     });
