@@ -86,11 +86,32 @@ code {
 #btn-reload i{
   font-size: 2.3rem;
 }
+#btn-reload{
+  animation: Rotate 2s infinite;
+}
 #btn-search {
   right: .4rem;
   z-index: 60;
   bottom: 5rem;
   font-size: 2.3rem;
+}
+.active {
+  background-color: #353b48;
+  color: #dcdde1;
+}
+
+@keyframes Rotate {
+  0% {
+    transform: rotate(0);
+  }
+  33% {
+    transform: rotate(20deg);
+    color: #c23616;
+  }
+  67%{
+    transform: rotate(-20deg);
+    color: #e58e26;
+  }
 }
 .btn-form-close {
   position: absolute;

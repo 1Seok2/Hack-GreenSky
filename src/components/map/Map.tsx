@@ -165,18 +165,21 @@ const Map = () => {
   const btn_search = () => {
     const form : any= document.querySelector('.form-search');
     const menu_wrap = document.querySelector('#menu_wrap');
+    const actived = document.querySelector('#btn-search');
     if(formState === 'none'){
       form.classList.remove('none');
       form.classList.add('show');
       setFormState('show');
       menu_wrap?.classList.remove('show');
       menu_wrap?.classList.add('none');
+      actived?.classList.add('active');
     } else {
       form.classList.remove('show');
       form.classList.add('none');
       setFormState('none');
       menu_wrap?.classList.remove('show');
       menu_wrap?.classList.add('none');
+      actived?.classList.remove('active');
     }
   }
 
