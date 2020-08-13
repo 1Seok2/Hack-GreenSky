@@ -27794,6 +27794,45 @@
          "address_name": "부산 사하구 괴정동 883-7",
          "address_english": "Song Yi Ne",
          "latlng": "35.09817222818889, 128.9923214826871"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#경기 확진자",
+         "month": 8,
+         "day": 9,
+         "name": "경기",
+         "full": "경기 확진자",
+         "address": "스타벅스 더양평DTR",
+         "address_name": "경기 양평군 양평읍 양근리 501-3",
+         "address_english": "Starbucks The Yangpyeong DTR",
+         "latlng": "37.497025597482455, 127.4816959605717"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#서울 확진자",
+         "month": 8,
+         "day": 9,
+         "name": "서울",
+         "full": "서울 확진자",
+         "address": "CGV 용산아이파크몰",
+         "address_name": "서울 용산구 한강로3가 40-999",
+         "address_english": "CGV Yongsan I'Park Mall",
+         "latlng": "37.52975174071409, 126.963950815777"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#서울 확진자",
+         "month": 8,
+         "day": 11,
+         "name": "서울",
+         "full": "서울 확진자",
+         "address": "신세계백화점 강남점",
+         "address_name": "서울 서초구 반포동 19-3",
+         "address_english": "Shinsegae Department Store Gangnam Branch",
+         "latlng": "37.505305732081965, 127.00432032924516"
       }
    ]
 }
