@@ -33981,6 +33981,97 @@
          "address_name": "경기 파주시 광탄면 발랑리 426-33",
          "address_english": "Seowon Valley Country Club",
          "latlng": "37.8246317392752, 126.893259090631"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#경남 확진자",
+         "month": 8,
+         "day": 14,
+         "name": "경남",
+         "full": "경남 확진자",
+         "address": "부송국수",
+         "address_name": "경남 거제시 거제면 오수리 371-2",
+         "address_english": "Busongguksu",
+         "latlng": "34.834668806688306, 128.59952652447825"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#경남 확진자",
+         "month": 8,
+         "day": 15,
+         "name": "경남",
+         "full": "경남 확진자",
+         "address": "부송국수",
+         "address_name": "경남 거제시 거제면 오수리 371-2",
+         "address_english": "Busongguksu",
+         "latlng": "34.834668806688306, 128.59952652447825"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#경남 확진자",
+         "month": 8,
+         "day": 16,
+         "name": "경남",
+         "full": "경남 확진자",
+         "address": "부송국수",
+         "address_name": "경남 거제시 거제면 오수리 371-2",
+         "address_english": "Busongguksu",
+         "latlng": "34.834668806688306, 128.59952652447825"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#경남 확진자",
+         "month": 8,
+         "day": 17,
+         "name": "경남",
+         "full": "경남 확진자",
+         "address": "부송국수",
+         "address_name": "경남 거제시 거제면 오수리 371-2",
+         "address_english": "Busongguksu",
+         "latlng": "34.834668806688306, 128.59952652447825"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#경남 확진자",
+         "month": 8,
+         "day": 18,
+         "name": "경남",
+         "full": "경남 확진자",
+         "address": "부송국수",
+         "address_name": "경남 거제시 거제면 오수리 371-2",
+         "address_english": "Busongguksu",
+         "latlng": "34.834668806688306, 128.59952652447825"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#경남 확진자",
+         "month": 8,
+         "day": 21,
+         "name": "경남",
+         "full": "경남 확진자",
+         "address": "고기들의창고",
+         "address_name": "경남 거제시 거제면 남동리 29-21",
+         "address_english": "warehouse of meat",
+         "latlng": "34.8475480780578, 128.59225303535823"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#충남 확진자",
+         "month": 8,
+         "day": 16,
+         "name": "충남",
+         "full": "충남 확진자",
+         "address": "대천해수욕장",
+         "address_name": "충남 보령시 신흑동 2267-3",
+         "address_english": "Daecheon Beach",
+         "latlng": "36.3102317300706, 126.513481592784"
       }
    ]
 }

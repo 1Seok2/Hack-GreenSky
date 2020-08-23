@@ -15,7 +15,7 @@ const MapNav = () => {
                 <li className="navRed">
                     <i className="icon-circle icon-circle-red"></i> 3일 이내
                 </li>
-                <li style={{textAlign:"right", fontSize:".7rem"}}><span style={{fontSize:'.5rem'}}>마지막 업데이트 </span>'200823 14:53</li>
+                <li style={{textAlign:"right", fontSize:".7rem"}}><span style={{fontSize:'.5rem'}}>마지막 업데이트 </span>'200823 19:37</li>
             </ul>
         </>
     );
