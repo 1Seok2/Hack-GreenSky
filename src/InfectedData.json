@@ -36828,6 +36828,45 @@
          "address_name": "경기 부천시 도당동 164-19",
          "address_english": "Big Tree Restaurant",
          "latlng": "37.51063297860319, 126.780900900109"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#제주 확진자",
+         "month": 8,
+         "day": 26,
+         "name": "제주",
+         "full": "제주 확진자",
+         "address": "루프탑정원",
+         "address_name": "제주특별자치도 서귀포시 남원읍 태흥리 457-1",
+         "address_english": "Rooft",
+         "latlng": "33.28347027859351, 126.74528989324288"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#제주 확진자",
+         "month": 8,
+         "day": 27,
+         "name": "제주",
+         "full": "제주 확진자",
+         "address": "루프탑정원",
+         "address_name": "제주특별자치도 서귀포시 남원읍 태흥리 457-1",
+         "address_english": "Rooft",
+         "latlng": "33.28347027859351, 126.74528989324288"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#제주 확진자",
+         "month": 8,
+         "day": 27,
+         "name": "제주",
+         "full": "제주 확진자",
+         "address": "CU 서귀태신로점",
+         "address_name": "제주특별자치도 서귀포시 남원읍 태흥리 536-1",
+         "address_english": "CU Seogwipo Taesinno Branch",
+         "latlng": "33.286573719692605, 126.745301275218"
       }
    ]
 }
