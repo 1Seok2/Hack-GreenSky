@@ -19,7 +19,7 @@ const MapNav = () => {
                     <span style={{fontSize:'.5rem'}}>
                         마지막 업데이트
                     </span>
-                    '200903 09:57
+                    '200903 18:37
                 </li>
             </ul>
         </>
