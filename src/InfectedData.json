@@ -1,6 +1,5 @@
 {
-   "mapData": true,
-   "data": [
+   "mapData": [
       {
          "solo": true,
          "profile": "-",
@@ -40884,6 +40883,19 @@
          "address_name": "경기 용인시 처인구 유방동 347-2",
          "address_english": "Bon Gui Yurim Branch",
          "latlng": "37.25686074955391, 127.211805887656"
+      },
+      {
+         "solo": true,
+         "profile": "-",
+         "tag": "#경기 확진자",
+         "month": 9,
+         "day": 4,
+         "name": "경기",
+         "full": "경기 확진자",
+         "address": "콩사랑 보라점",
+         "address_name": "경기 용인시 기흥구 보라동 573-5",
+         "address_english": "Kongsarang Purple Point",
+         "latlng": "37.25428224755818, 127.10924945842135"
       },
       {
          "solo": true,
