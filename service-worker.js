@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Hack-GreenSky/precache-manifest.2ce6ba39705e3993307644e28ed8ae5d.js"
+  "/Hack-GreenSky/precache-manifest.b1b3d62c31068abec030d98df70a130a.js"
 );
 
 self.addEventListener('message', (event) => {
