@@ -3,18 +3,6 @@ deployed => [Corona Find](https://1seok2.github.io/Hack-GreenSky/#/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# How to use
-
-if you wanna use this
-### `git clone https://github.com/1Seok2/Hack-GreenSky.git`
-
-and then, change directory to cloned repository,
-
-### `npm install`
-
-Runs the app in the development mode.<br />
-
-### `npm start`
 
 
 # This shows you...
