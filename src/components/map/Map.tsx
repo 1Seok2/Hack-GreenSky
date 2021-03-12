@@ -6,7 +6,6 @@ import PositionDistance from "./marker/patient/PositionDistance";
 import Data from "../alami/Data";
 import "../../style/search.kakao.scss";
 import "../../style/fontello-6de7bc38/css/mapticon-embedded.scss";
-import DateGapAcumulator from "./marker/patient/DayGapAcumulator";
 import SearchPlaces from "./api/SearchPlaces";
 import MakeMarkerInfected from "./marker/MakeMarkerInfected";
 import MakeMarkerMyPosition from "./marker/MakeMarkerMyPosition";
@@ -15,7 +14,6 @@ import AddMarker from "./marker/AddMarker";
 import SearchLists from "./compose/SearchLists";
 import ButtonReloadSetPosition from "./button/ButtonReloadSetPosition";
 import moment from "moment";
-import axios from "axios";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -53,7 +51,7 @@ const Map = ({Patient} : any) => {
   const [formState, setFormState] = useState("none");
   const mounted = true;
 
-  const onEvent = useCallback((event: any) => {
+  const onEvent = (event: any) => {
     if (mounted) {
       setState({
         ...state,
@@ -67,14 +65,11 @@ const Map = ({Patient} : any) => {
       setLatitude(event.coords.latitude);
       setLongitude(event.coords.longitude);
     }
-  },[mounted, state])
-  const onError = useCallback(
-    (error: any) => {
+  }
+  const onError = (error: any) => {
       setState({ ...state, error: error.message });
       console.log("error: ", error);
-    },
-    [state]
-  );
+    }
   let map: any;
 
   const makeArrayPatient = async () => {
@@ -148,7 +143,7 @@ const Map = ({Patient} : any) => {
     setCountInCircle((prevCount) => prevCount + 1);
   };
 
-  const btn_reload = useCallback(() => {
+  const btn_reload = () => {
     setCountInCircle(0);
     const loadedCoords = localStorage.getItem("coords");
     if (loadedCoords === null) {
@@ -173,7 +168,7 @@ const Map = ({Patient} : any) => {
       makeArrayPatient();
     }
     init();
-  }, []);
+  }
 
   const btn_search = () => {
     const form: any = document.querySelector(".form-search");
@@ -396,7 +391,7 @@ const Map = ({Patient} : any) => {
     }
   };
 
-  const init = useCallback(() => {
+  const init = () => {
     const Container: any = document.getElementById("dataContainer");
     if (countInCircle < 1) {
       setStateAlami({
@@ -431,26 +426,18 @@ const Map = ({Patient} : any) => {
       });
       Container.style.backgroundColor = stateAlami.conditionBgColor;
     }
-  }, [countInCircle, stateAlami.conditionBgColor]);
+  }
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(onEvent, onError);
-    // init();
-    // btn_reload();
+    init();
+    btn_reload();
     return () => {
       DeleteMapElements();
     };
-  }, [onError, onEvent]);
+  }, []);
 
-  useEffect(()=>{
-    init();
-  },[init])
-
-  useEffect(()=>{
-
-    btn_reload();
-  },[btn_reload])
-
+  console.log('render!')
   return (
     <>
       <div id="map"></div>
@@ -482,7 +469,6 @@ const Map = ({Patient} : any) => {
         </a>
       </div>
       <NavBottom />
-      {/* <InfectedMarker /> */}
     </>
   );
 };

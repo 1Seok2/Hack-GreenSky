@@ -68,7 +68,7 @@ const Data = (props: DataProps) => {
     const Container: any = document.getElementById("dataContainer");
     Container.style.backgroundColor = props.alami.conditionBgColor;
     console.log("rerender");
-  }, [nowTime.nowMin]);
+  }, []);
 
   return (
     <>

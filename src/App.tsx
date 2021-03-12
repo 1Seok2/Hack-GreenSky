@@ -21,7 +21,7 @@ const App = () => {
 
   useEffect( () => {
       getData();
-  });
+  },[]);
 
   return (
       isLoading ?
