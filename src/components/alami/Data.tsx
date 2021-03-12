@@ -3,8 +3,8 @@ import MakeSentence from "./MakeSentence";
 import OtherMenu from "../navigation/OtherMenu";
 import AlertModal from "./modal/alertModal";
 import Tips from "./Tips";
-import "../../style/Data.css";
-import "../../style/fontello-6de7bc38/css/mapticon-embedded.css";
+import "../../style/data.scss";
+import "../../style/fontello-6de7bc38/css/mapticon-embedded.scss";
 
 interface DataProps {
   lat: number;

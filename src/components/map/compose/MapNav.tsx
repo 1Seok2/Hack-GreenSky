@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../style/fontello-6de7bc38/css/mapticon-embedded.css";
+import "../../../style/fontello-6de7bc38/css/mapticon-embedded.scss";
 
 const MapNav = () => {
   return (
@@ -15,10 +15,10 @@ const MapNav = () => {
         <li className="navRed">
           <i className="icon-circle icon-circle-red"></i> 3일 이내
         </li>
-        <li style={{ textAlign: "right", fontSize: ".7rem" }}>
-          <span style={{ fontSize: ".5rem" }}>마지막 업데이트</span>
-          '201229 13:44
-        </li>
+        {/*<li style={{ textAlign: "right", fontSize: ".7rem" }}>*/}
+        {/*  <span style={{ fontSize: ".5rem" }}>마지막 업데이트</span>*/}
+        {/*  '201229 13:44*/}
+        {/*</li>*/}
       </ul>
     </>
   );

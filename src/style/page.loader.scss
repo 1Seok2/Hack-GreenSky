@@ -1,0 +1,31 @@
+.map-loader-container {
+  position: fixed;
+  left: 49.2%;
+  top: 49.2%;
+  transform: translate(-50%, -50%);
+}
+
+.map-loader {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.map-loader:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 10px solid #fff;
+  border-color: lightskyblue transparent lightskyblue transparent;
+  animation: map-loader 1.2s both infinite;
+}
+@keyframes map-loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,14 +1,34 @@
-import React from 'react';
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
 import Map from './components/map/Map';
-// import NewMap from './components/map/NewMap';
-
+import './style/page.loader.scss'
+import axios from "axios";
 const App = () => {
+  const [state, setState] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+
+  const getData = async () => {
+      let result = null;
+
+      try {
+          result = (await axios.get("https://coroname.me/getdata")).data
+      } catch (e) {
+          console.error(e);
+      } finally {
+          result && setState(result);
+          setLoading(false);
+      }
+  }
+
+  useEffect( () => {
+      getData();
+  });
+
   return (
-    <HashRouter basename={process.env.PUBLIC_URL}>
-      <Route path="/" component={Map} />
-      {/* <Route path="/" component={NewMap} /> */}
-    </HashRouter>
+      isLoading ?
+          <div className="map-loader-container">
+              <div className="map-loader"></div>
+          </div>
+          : <Map Patient={state} />
   );
 };
 

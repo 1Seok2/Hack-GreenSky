@@ -4,8 +4,8 @@ import NavBottom from "../navigation/NavBottom";
 import PositionDistance from "./marker/patient/PositionDistance";
 // import Patient from '../../InfectedData.json';
 import Data from "../alami/Data";
-import "../../style/search_kakao.css";
-import "../../style/fontello-6de7bc38/css/mapticon-embedded.css";
+import "../../style/search.kakao.scss";
+import "../../style/fontello-6de7bc38/css/mapticon-embedded.scss";
 import DateGapAcumulator from "./marker/patient/DayGapAcumulator";
 import SearchPlaces from "./api/SearchPlaces";
 import MakeMarkerInfected from "./marker/MakeMarkerInfected";
@@ -30,7 +30,7 @@ const colorOrg = "#f39c12";
 const colorGrn = "#27ae60";
 
 //hooks
-const Map = () => {
+const Map = ({Patient} : any) => {
   const [state, setState] = useState({
     accuracy: null,
     altitude: null,
@@ -87,71 +87,60 @@ const Map = () => {
 
     var markers: any = [];
 
-    if (true) {
-      let Patient: any = null;
+    if (Patient) {
+        Patient.data.map((value: any) => {
+          let daysGap: number;
+          // daysGap = isInFewDays(value.month, value.day);
+          // const curDay = {
+          //   _month : value.month,
+          //   _date : value.day
+          // }
+          // daysGap = DateGapAcumulator(curDay);
+          daysGap = moment(Date.now()).diff(moment(value.createDate), "days");
+          if (daysGap <= 14) {
+            // console.log(daysGap);
+            let sliced = value.latlng.split(", ");
+            let patient = {
+              position: value.address,
+              lat: parseFloat(sliced[0]),
+              lng: parseFloat(sliced[1]),
+              month: value.month,
+              day: value.day,
+            };
+            PatientInfo = [...PatientInfo, patient];
 
-      try {
-        Patient = (await axios.get("https://coroname.me/getdata")).data;
-      } catch (err) {
-        console.log("data err : ", err);
-      } finally {
-        console.log(Patient);
-
-        if (Patient) {
-          Patient.data.map((value: any) => {
-            let daysGap: number;
-            // daysGap = isInFewDays(value.month, value.day);
-            // const curDay = {
-            //   _month : value.month,
-            //   _date : value.day
-            // }
-            // daysGap = DateGapAcumulator(curDay);
-            daysGap = moment(Date.now()).diff(moment(value.createDate), "days");
-            if (daysGap <= 14) {
-              // console.log(daysGap);
-              let sliced = value.latlng.split(", ");
-              let patient = {
-                position: value.address,
-                lat: parseFloat(sliced[0]),
-                lng: parseFloat(sliced[1]),
-                month: value.month,
-                day: value.day,
-              };
-              PatientInfo = [...PatientInfo, patient];
-
-              if (daysGap <= 3) {
-                markers = [
-                  ...markers,
-                  MakeMarkerInfected(map, patient, colorRed),
-                ];
-              } else if (3 < daysGap && daysGap <= 7) {
-                markers = [
-                  ...markers,
-                  MakeMarkerInfected(map, patient, colorOrg),
-                ];
-              } else if (7 < daysGap && daysGap <= 14) {
-                markers = [
-                  ...markers,
-                  MakeMarkerInfected(map, patient, colorGrn),
-                ];
-              }
-
-              let distance: number;
-              const getDistance = {
-                lat: latitude,
-                lng: longitude,
-                _lat: patient.lat,
-                _lng: patient.lng,
-              };
-              distance = PositionDistance(getDistance);
-              if (distance < 3600) {
-                AddCount();
-              }
+            if (daysGap <= 3) {
+              markers = [
+                ...markers,
+                MakeMarkerInfected(map, patient, colorRed),
+              ];
+            } else if (3 < daysGap && daysGap <= 7) {
+              markers = [
+                ...markers,
+                MakeMarkerInfected(map, patient, colorOrg),
+              ];
+            } else if (7 < daysGap && daysGap <= 14) {
+              markers = [
+                ...markers,
+                MakeMarkerInfected(map, patient, colorGrn),
+              ];
             }
-          });
-        }
-      }
+
+            let distance: number;
+            const getDistance = {
+              lat: latitude,
+              lng: longitude,
+              _lat: patient.lat,
+              _lng: patient.lng,
+            };
+            distance = PositionDistance(getDistance);
+            if (distance < 3600) {
+              AddCount();
+            }
+          }
+        });
     }
+
     clusterer.addMarkers(markers);
   };
 
